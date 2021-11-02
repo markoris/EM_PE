@@ -108,7 +108,7 @@ GW170817_kn_interp_angle: directories
 	chmod u+x pe_runs/$@_$(shell date +%Y%m%d)/plot_corner.sh
 	chmod u+x pe_runs/$@_$(shell date +%Y%m%d)/plot_lc.sh
 	chmod u+x pe_runs/$@_$(shell date +%Y%m%d)/combine.sh
-	cp ~/template.sub pe_runs/$@_$(shell date +%Y%m%d)/run.sub
+	#cp ~/template.sub pe_runs/$@_$(shell date +%Y%m%d)/run.sub
 	sed -i 's/samples.txt/samples-\$$1.txt/' pe_runs/$@_$(shell date +%Y%m%d)/sample.sh
 
 kilonova_pp_plot: directories

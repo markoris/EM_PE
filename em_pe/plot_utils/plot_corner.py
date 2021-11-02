@@ -1,16 +1,19 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import print_function
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
 import numpy as np
 import corner
 import argparse
 
-try:
-    import matplotlib.pyplot as plt
-except:
-    import matplotlib
-    matplotlib.use("Agg")
-    import matplotlib.pyplot as plt
+#try:
+#    import matplotlib.pyplot as plt
+#except:
+#import matplotlib
+#matplotlib.use("Agg")
+#import matplotlib.pyplot as plt
 
 def _parse_command_line_args():
     '''
@@ -31,10 +34,11 @@ def _parse_command_line_args():
     parser.add_argument('--log-mass', action='store_true', help="Plot log10 of masses")
     parser.add_argument('--simulation-points', help='File with simulation parameters')
     parser.add_argument('--simulation-lnL', help='File with simulation log likelihoods')
+    parser.add_argument('--font-size', type=float, default=16, help='Size of font for corner plot')
     return parser.parse_args()
 
 def generate_corner_plot(sample_files, out, params, truths=None, cutoff=0, frac=1.0, leg=None,
-                  cl='default', title=None, combine=False, min_weight=0, log_mass=False, sim_points=None, sim_lnL=None):
+                  cl='default', title=None, combine=False, min_weight=0, log_mass=False, sim_points=None, sim_lnL=None, font_size=16):
     '''
     Generates a corner plot for the specified posterior samples and parameters.
 
@@ -64,7 +68,7 @@ def generate_corner_plot(sample_files, out, params, truths=None, cutoff=0, frac=
         addition to individual bands (useful for generating density gradient)
     '''
     ### colors to iterate through
-    color_list=['black', 'red', 'orange', 'yellow', 'green', 'cyan', 'blue',
+    color_list=['black', 'red', 'blue', 'yellow', 'green', 'cyan', 'orange',
                 'purple', 'gray']
     ### dictionary of LaTeX parameter name strings
     tex_dict = {'mej':'$m_{ej}$ $(M_\\odot)$',
@@ -200,7 +204,8 @@ def generate_corner_plot(sample_files, out, params, truths=None, cutoff=0, frac=
             elif params[ii] == 'log_mej_blue':
                 params[ii] = 'mej_blue'
                 x[:,ii] = 10.0**x[:,ii]
-
+        plt.rc('font', size=font_size)
+        plt.rc('lines', lw=2*float(font_size/16.))
         labels = []
         for param in params:
             if param in tex_dict:
@@ -216,7 +221,7 @@ def generate_corner_plot(sample_files, out, params, truths=None, cutoff=0, frac=
         ### make the corner plot
         fig_base = corner.corner(x, weights=weights, levels=args.cl, fig=fig_base, labels=labels, truths=truths,
                                  color=color, plot_datapoints=False, plot_density=plot_density,
-                                 contours=True, smooth1d=0.1, smooth=0.1, label_kwargs={"fontsize":16})
+                                 contours=True, smooth1d=0.1, smooth=0.1, label_kwargs={"fontsize":font_size})
         i += 1
         params = params_copy
     if sim_points is not None:
@@ -248,7 +253,7 @@ def generate_corner_plot(sample_files, out, params, truths=None, cutoff=0, frac=
         xcoord = 0 #len(params) - 1
         ycoord = len(params)
         ### generate the legend
-        lgd = plt.legend(leg, bbox_to_anchor=(xcoord, ycoord), loc='upper left', prop={"size":16})
+        lgd = plt.legend(leg, bbox_to_anchor=(xcoord, ycoord), loc='upper left', prop={"size":float(font_size*1.5)})
         #lgd = plt.legend(leg, loc="center left")
         ### fix the colors in the legend -- for some reason, if truth values are provided,
         ### every entry in the legend will have the same color
@@ -275,5 +280,6 @@ if __name__ == '__main__':
     log_mass = args.log_mass
     sim_points = args.simulation_points
     sim_lnL = args.simulation_lnL
+    font_size = args.font_size
     generate_corner_plot(sample_files, out, params, truths, cutoff, frac, leg, cl,
-                  title, combine, min_weight, log_mass, sim_points, sim_lnL)
+                  title, combine, min_weight, log_mass, sim_points, sim_lnL, font_size=font_size)

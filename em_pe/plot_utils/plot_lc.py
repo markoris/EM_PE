@@ -5,12 +5,12 @@ import numpy as np
 import argparse
 import sys
 
-try:
-    import matplotlib.pyplot as plt
-except:
-    import matplotlib
-    matplotlib.use("Agg")
-    import matplotlib.pyplot as plt
+#try:
+#    import matplotlib.pyplot as plt
+#except:
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
 
 from em_pe.models import model_dict
 
@@ -28,9 +28,11 @@ def _parse_command_line_args():
     parser.add_argument('--b', action='append', help='Bands to plot (in same order as posterior sample files)')
     parser.add_argument('--fixed-param', action='append', nargs=2, help='Fixed parameters (i.e. parameters without posterior samples)')
     parser.add_argument('--log-time', action='store_true', help='Use a log scale for time axis')
+    parser.add_argument('--font-size', type=float, help="Font size for plotting")
+    parser.add_argument('--late-start', action='store_true', help='Start at 0.125 or 0.5 days for light curve plotting.')
     return parser.parse_args()
 
-def generate_lc_plot(out, b, tmin, tmax, m=None, sample_file=None, lc_file=None, fixed_params=None, log_time=False):
+def generate_lc_plot(out, b, tmin, tmax, m=None, sample_file=None, lc_file=None, fixed_params=None, log_time=False, font_size=16, late_start=False):
     '''
     Generate a lightcurve plot
 
@@ -119,7 +121,7 @@ def generate_lc_plot(out, b, tmin, tmax, m=None, sample_file=None, lc_file=None,
                         lc_array[i] += 5.0 * (np.log10(params["dist"][i] * 1.0e6) - 1.0)
                 else:
                     lc_array = np.empty((num_samples, n_pts))
-                    lc_err_array = np.empty((num_samples, npts))
+                    lc_err_array = np.empty((num_samples, n_pts))
                     for row in range(num_samples):
                         params = dict(zip(param_names, param_array[row]))
                         if fixed_params is not None:
@@ -127,7 +129,7 @@ def generate_lc_plot(out, b, tmin, tmax, m=None, sample_file=None, lc_file=None,
                                 params[name] = val
                         model.set_params(params, [tmin, tmax])
                         dist = params['dist']
-                        lc_array[row], lc_err_arry[row] = model.evaluate(t, band)
+                        lc_array[row], lc_err_array[row] = model.evaluate(t, band)
                         lc_array[row] += 5.0 * (np.log10(dist * 1.0e6) - 1.0)
                 lc_array += offsets[band]
                 #min_lc = np.amin(lc_array, axis=0)
@@ -165,14 +167,17 @@ def generate_lc_plot(out, b, tmin, tmax, m=None, sample_file=None, lc_file=None,
         plt.gca().invert_yaxis()
     if log_time:
         plt.xscale('log')
-    ticks = [x for x in [0.125, 0.5, 1, 2, 4, 8, 16, 32] if x <= tmax]
+    if late_start:
+        ticks = [x for x in [0.5, 1, 2, 4, 8, 16, 32] if x <= tmax]
+    else:
+        ticks = [x for x in [0.125, 0.5, 1, 2, 4, 8, 16, 32] if x <= tmax]
     labels = [str(x) for x in ticks]
     plt.gca().set_xticks(ticks)
     plt.gca().set_xticklabels(labels)
-    plt.gca().tick_params(labelsize=16)
-    plt.ylabel('$m_{AB}$', fontsize=16)
-    plt.legend(prop={"size":16})
-    plt.xlabel('Time (days)', fontsize=16)
+    plt.gca().tick_params(labelsize=font_size)
+    plt.ylabel('$m_{AB}$', fontsize=font_size)
+    plt.legend(prop={"size":0.75*font_size}, ncol=2, framealpha=0)
+    plt.xlabel('Time (days)', fontsize=font_size)
     plt.tight_layout()
     plt.savefig(out)
 
@@ -238,11 +243,13 @@ def main():
     b = args.b
     lc_file = args.lc_file
     fixed_params = args.fixed_param
+    font_size = args.font_size
+    late_start = args.late_start
     if fixed_params is not None:
         for i in range(len(fixed_params)):
             fixed_params[i][1] = float(fixed_params[i][1])
     log_time = args.log_time
-    generate_lc_plot(out, b, tmin, tmax, m=m, sample_file=sample_file, lc_file=lc_file, fixed_params=fixed_params, log_time=log_time)
+    generate_lc_plot(out, b, tmin, tmax, m=m, sample_file=sample_file, lc_file=lc_file, fixed_params=fixed_params, log_time=log_time, font_size=font_size, late_start=late_start)
 
 if __name__ == '__main__':
     main()

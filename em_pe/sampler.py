@@ -41,6 +41,7 @@ def _parse_command_line_args():
     parser.add_argument('--set-limit', action='append', nargs=3, help='Modify parameter limits (e.g. --set-limit mej_red 0.008 0.012)')
     parser.add_argument('--ignore-model-error', action='store_true', help='Fix model error to 0 (i.e. ignore it)')
     parser.add_argument('--gaussian-prior-theta', nargs=2, type=float, help='Mean and std. dev. for Gaussian prior (overrides default uniform prior for angle')
+    parser.add_argument('--rprocess-prior', action="store_true", help='Use r-process prior during sampling')
     return parser.parse_args()
 
 class sampler:
@@ -71,7 +72,8 @@ class sampler:
     def __init__(self, data_loc, m, files, out, v=True, L_cutoff=0, min_iter=20,
                  max_iter=20, ncomp=None, fixed_params=None,
                  estimate_dist=True, epoch=5, correlate_dims=None, burn_in_length=None,
-                 beta_start=1.0, beta_end=1.0, keep_npts=None, nprocs=1, limits=None, ignore_m_err=False, gaussian_prior_theta=None):
+                 beta_start=1.0, beta_end=1.0, keep_npts=None, nprocs=1, limits=None, ignore_m_err=False, gaussian_prior_theta=None,
+                 rprocess_prior=True):
         ### parameters passed in from user or main()
         self.data_loc = data_loc
         self.m = m
@@ -94,6 +96,7 @@ class sampler:
         self.nprocs = nprocs
         self.ignore_m_err = ignore_m_err
         self.gaussian_prior_theta = gaussian_prior_theta
+        self.rprocess_prior = rprocess_prior
         self.limits = limits if limits is not None else {}
         if ncomp is None:
             self.ncomp = 1
@@ -181,6 +184,17 @@ class sampler:
             if self.gaussian_prior_theta is not None and p == "theta":
                 from scipy.stats import norm
                 ret *= norm.pdf(x, loc=self.gaussian_prior_theta[0], scale=self.gaussian_prior_theta[1])
+            elif self.rprocess_prior and p == "mej_dyn":
+                from scipy.interpolate import interp1d
+                dynamical_prior = np.loadtxt('/home/marko.ristic/EM_PE/pe_runs/GW170817_kn_interp_angle_20211015/marginalized_md_prior.dat')
+                prior_md = interp1d(dynamical_prior[:, 0], dynamical_prior[:, 1], kind='cubic')
+                ret *= prior_md(x)
+                print('md prior: ', prior_md(x))
+            elif self.rprocess_prior and p == "mej_wind":
+                wind_prior = np.loadtxt('/home/marko.ristic/EM_PE/pe_runs/GW170817_kn_interp_angle_20211015/marginalized_mw_prior.dat')
+                prior_mw = interp1d(wind_prior[:, 0], wind_prior[:, 1], kind='cubic')
+                ret *= prior_mw(x)
+                print('mw prior: ', prior_mw(x))
             else:
                 ret *= self.params[p].prior(x)
         return ret.reshape((n, 1))
