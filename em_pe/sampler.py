@@ -184,19 +184,28 @@ class sampler:
             if self.gaussian_prior_theta is not None and p == "theta":
                 from scipy.stats import norm
                 ret *= norm.pdf(x, loc=self.gaussian_prior_theta[0], scale=self.gaussian_prior_theta[1])
-            elif self.rprocess_prior and p == "mej_dyn":
-                from scipy.interpolate import interp1d
-                dynamical_prior = np.loadtxt('/home/marko.ristic/EM_PE/pe_runs/GW170817_kn_interp_angle_20211015/marginalized_md_prior.dat')
-                prior_md = interp1d(dynamical_prior[:, 0], dynamical_prior[:, 1], kind='cubic')
-                ret *= prior_md(x)
-                print('md prior: ', prior_md(x))
-            elif self.rprocess_prior and p == "mej_wind":
-                wind_prior = np.loadtxt('/home/marko.ristic/EM_PE/pe_runs/GW170817_kn_interp_angle_20211015/marginalized_mw_prior.dat')
-                prior_mw = interp1d(wind_prior[:, 0], wind_prior[:, 1], kind='cubic')
-                ret *= prior_mw(x)
-                print('mw prior: ', prior_mw(x))
+            #elif self.rprocess_prior and p == "mej_dyn":
+            #    from scipy.interpolate import interp1d
+            #    dynamical_prior = np.loadtxt('/home/marko.ristic/EM_PE/pe_runs/GW170817_kn_interp_angle_20211015/marginalized_md_prior.dat')
+            #    prior_md = interp1d(dynamical_prior[:, 0], dynamical_prior[:, 1], kind='cubic')
+            #    ret *= prior_md(x)
+            #    print('md prior: ', prior_md(x))
+            #elif self.rprocess_prior and p == "mej_wind":
+            #    wind_prior = np.loadtxt('/home/marko.ristic/EM_PE/pe_runs/GW170817_kn_interp_angle_20211015/marginalized_mw_prior.dat')
+            #    prior_mw = interp1d(wind_prior[:, 0], wind_prior[:, 1], kind='cubic')
+            #    ret *= prior_mw(x)
+            #    print('mw prior: ', prior_mw(x))
             else:
                 ret *= self.params[p].prior(x)
+        if self.rprocess_prior:
+            from scipy.interpolate import interp2d
+            x = sample_array[:, index_dict['mej_dyn']]
+            y = sample_array[:, index_dict['mej_wind']]
+            md, mw, r = np.loadtxt('/home/marko.ristic/EM_PE/em_pe/r_process_prior_2d.dat', unpack=True)
+            r -= np.min(r)
+            log_prior_joint = interp2d(md, mw, r, kind='cubic')
+            prior_2d = np.array([log_prior_joint(x[i], y[i]) for i in range(x.shape[0])])
+            ret *= np.exp(-0.01*prior_2d).flatten()
         return ret.reshape((n, 1))
 
     def _evaluate_lnL(self, params, model, vectorized=False):
