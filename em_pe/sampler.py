@@ -42,6 +42,7 @@ def _parse_command_line_args():
     parser.add_argument('--ignore-model-error', action='store_true', help='Fix model error to 0 (i.e. ignore it)')
     parser.add_argument('--gaussian-prior-theta', nargs=2, type=float, help='Mean and std. dev. for Gaussian prior (overrides default uniform prior for angle')
     parser.add_argument('--rprocess-prior', action="store_true", help='Use r-process prior during sampling')
+    parser.add_argument('--scale-factor', type=float, default=1.0, help='Scaling factor for r-process prior likelihood evaluation')
     return parser.parse_args()
 
 class sampler:
@@ -73,7 +74,7 @@ class sampler:
                  max_iter=20, ncomp=None, fixed_params=None,
                  estimate_dist=True, epoch=5, correlate_dims=None, burn_in_length=None,
                  beta_start=1.0, beta_end=1.0, keep_npts=None, nprocs=1, limits=None, ignore_m_err=False, gaussian_prior_theta=None,
-                 rprocess_prior=True):
+                 rprocess_prior=True, scale_factor=1.0):
         ### parameters passed in from user or main()
         self.data_loc = data_loc
         self.m = m
@@ -97,6 +98,7 @@ class sampler:
         self.ignore_m_err = ignore_m_err
         self.gaussian_prior_theta = gaussian_prior_theta
         self.rprocess_prior = rprocess_prior
+        self.scale_factor = scale_factor
         self.limits = limits if limits is not None else {}
         if ncomp is None:
             self.ncomp = 1
@@ -205,7 +207,7 @@ class sampler:
             r -= np.min(r)
             log_prior_joint = interp2d(md, mw, r, kind='cubic')
             prior_2d = np.array([log_prior_joint(x[i], y[i]) for i in range(x.shape[0])])
-            ret *= np.exp(-0.01*prior_2d).flatten()
+            ret *= np.exp(-self.scale_factor*prior_2d).flatten()
         return ret.reshape((n, 1))
 
     def _evaluate_lnL(self, params, model, vectorized=False):
@@ -432,13 +434,14 @@ def main():
     beta_end = args.beta_end
     keep_npts = args.keep_npts
     nprocs = args.nprocs
+    scale_factor = args.scale_factor
     if args.set_limit is not None:
         limits = {name:(float(llim), float(rlim)) for (name, llim, rlim) in args.set_limit}
     else:
         limits = None
     s = sampler(data_loc, m, files, out, v=v, L_cutoff=L_cutoff, min_iter=min_iter, max_iter=max_iter, ncomp=ncomp, 
             fixed_params=fixed_params, estimate_dist=estimate_dist, epoch=epoch, correlate_dims=correlate_dims,
-            burn_in_length=burn_in_length, beta_start=beta_start, beta_end=beta_end, keep_npts=keep_npts, nprocs=nprocs, limits=limits, ignore_m_err=args.ignore_model_error, gaussian_prior_theta=args.gaussian_prior_theta)
+            burn_in_length=burn_in_length, beta_start=beta_start, beta_end=beta_end, keep_npts=keep_npts, nprocs=nprocs, limits=limits, ignore_m_err=args.ignore_model_error, gaussian_prior_theta=args.gaussian_prior_theta, rprocess_prior=args.rprocess_prior, scale_factor=scale_factor)
     #        burn_in_length, burn_in_start, beta_start, keep_npts, nprocs)
     s.generate_samples()
 
