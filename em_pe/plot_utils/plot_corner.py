@@ -35,10 +35,11 @@ def _parse_command_line_args():
     parser.add_argument('--simulation-points', help='File with simulation parameters')
     parser.add_argument('--simulation-lnL', help='File with simulation log likelihoods')
     parser.add_argument('--font-size', type=float, default=16, help='Size of font for corner plot')
+    parser.add_argument('--label-pad', type=float, default=1.3, help='Label padding to allow for larger font size')
     return parser.parse_args()
 
 def generate_corner_plot(sample_files, out, params, truths=None, cutoff=0, frac=1.0, leg=None,
-                  cl='default', title=None, combine=False, min_weight=0, log_mass=False, sim_points=None, sim_lnL=None, font_size=16):
+                  cl='default', title=None, combine=False, min_weight=0, log_mass=False, sim_points=None, sim_lnL=None, font_size=16, label_pad=1.3):
     '''
     Generates a corner plot for the specified posterior samples and parameters.
 
@@ -68,8 +69,8 @@ def generate_corner_plot(sample_files, out, params, truths=None, cutoff=0, frac=
         addition to individual bands (useful for generating density gradient)
     '''
     ### colors to iterate through
-    color_list=['black', 'red', 'blue', 'yellow', 'green', 'cyan', 'orange',
-                'purple', 'gray']
+    color_list=['black', 'red', 'blue', 'green', 'cyan', 'orange',
+                'purple', 'gray', 'yellow']
     ### dictionary of LaTeX parameter name strings
     tex_dict = {'mej':'$m_{ej}$ $(M_\\odot)$',
                 #'log_mej':'$\\log(m_{ej})$',
@@ -220,7 +221,7 @@ def generate_corner_plot(sample_files, out, params, truths=None, cutoff=0, frac=
             plot_density = False
         ### make the corner plot
         fig_base = corner.corner(x, weights=weights, levels=args.cl, fig=fig_base, labels=labels, truths=truths,
-                                 color=color, plot_datapoints=False, plot_density=plot_density,
+                                 color=color, plot_datapoints=False, plot_density=plot_density, labelpad=75,
                                  contours=True, smooth1d=0.1, smooth=0.1, label_kwargs={"fontsize":font_size})
         i += 1
         params = params_copy
@@ -260,9 +261,11 @@ def generate_corner_plot(sample_files, out, params, truths=None, cutoff=0, frac=
         for i in range(len(sample_files)):
             lgd.legendHandles[i].set_color(color_list[i])
         ### the extra arguments in savefig() make sure that the legend is not cut off
-        plt.savefig(out, bbox_extra_artists=(lgd,), bbox_inches='tight')
+        fig_base.subplots_adjust(right=label_pad, top=label_pad)
+        plt.savefig(out, bbox_extra_artists=(lgd,), bbox_inches='tight', pad_inches=label_pad/2)
     else:
-        plt.savefig(out)
+        fig_base.subplots_adjust(right=label_pad, top=label_pad)
+        plt.savefig(out, bbox_inches='tight', pad_inches=label_pad/2)
 
 if __name__ == '__main__':
     args = _parse_command_line_args()
@@ -281,5 +284,6 @@ if __name__ == '__main__':
     sim_points = args.simulation_points
     sim_lnL = args.simulation_lnL
     font_size = args.font_size
+    label_pad = args.label_pad
     generate_corner_plot(sample_files, out, params, truths, cutoff, frac, leg, cl,
-                  title, combine, min_weight, log_mass, sim_points, sim_lnL, font_size=font_size)
+                  title, combine, min_weight, log_mass, sim_points, sim_lnL, font_size=font_size, label_pad=label_pad)
