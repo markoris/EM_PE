@@ -186,17 +186,6 @@ class sampler:
             if self.gaussian_prior_theta is not None and p == "theta":
                 from scipy.stats import norm
                 ret *= norm.pdf(x, loc=self.gaussian_prior_theta[0], scale=self.gaussian_prior_theta[1])
-            #elif self.rprocess_prior and p == "mej_dyn":
-            #    from scipy.interpolate import interp1d
-            #    dynamical_prior = np.loadtxt('/home/marko.ristic/EM_PE/pe_runs/GW170817_kn_interp_angle_20211015/marginalized_md_prior.dat')
-            #    prior_md = interp1d(dynamical_prior[:, 0], dynamical_prior[:, 1], kind='cubic')
-            #    ret *= prior_md(x)
-            #    print('md prior: ', prior_md(x))
-            #elif self.rprocess_prior and p == "mej_wind":
-            #    wind_prior = np.loadtxt('/home/marko.ristic/EM_PE/pe_runs/GW170817_kn_interp_angle_20211015/marginalized_mw_prior.dat')
-            #    prior_mw = interp1d(wind_prior[:, 0], wind_prior[:, 1], kind='cubic')
-            #    ret *= prior_mw(x)
-            #    print('mw prior: ', prior_mw(x))
             else:
                 ret *= self.params[p].prior(x)
         if self.rprocess_prior:
