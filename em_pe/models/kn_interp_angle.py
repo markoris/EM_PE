@@ -10,10 +10,11 @@ from scipy.linalg import cholesky, cho_solve
 
 from .model import model_base
 
-@lru_cache(maxsize=8)
+@lru_cache(maxsize=64)
 def _load_gp(fname_base):
     kernel=None
     with open(fname_base+".json",'r') as f:
+        print('loading GP from json')
         my_json = json.load(f)
     my_X = np.loadtxt(fname_base+"_X.dat")
     my_y = np.loadtxt(fname_base+"_y.dat")
@@ -161,8 +162,8 @@ class kn_interp_angle(model_base):
         mags_err_interp = np.empty((self.params_array.shape[0], t_interp.size))
 
         for lc_index in range(t_interp.size):
-            if lc_index == 0 or (lc_index + 1) % 5 == 0:
-                print("  evaluating time step {} of {}".format(lc_index + 1, t_interp.size))
+            #if lc_index == 0 or (lc_index + 1) % 5 == 0:
+            print("  evaluating time step {} of {}".format(lc_index + 1, t_interp.size))
             interp_index = ind_list[lc_index]
             
             ### iterate over angular bins
@@ -208,3 +209,34 @@ class kn_interp_angle(model_base):
             ### if the model is being used in non-vectorized form, return 1d arrays
             return mags_out.flatten(), mags_err_out.flatten()
         return mags_out, mags_err_out
+
+class kn_interp_angle_no_mej_dyn(kn_interp_angle):
+    def __init__(self):
+        kn_interp_angle.__init__(self)
+
+    def set_params(self, params, t_bounds):
+        ### params should be a dictionary mapping parameter names to either single floats or 1d arrays.
+        ### if it's a float, convert it to an array
+        print('I am setting parameters')
+        if isinstance(params["mej_dyn"], float):
+            self.params_array = np.empty((1, 5))
+            self.theta = np.array([params["theta"]])
+        else:
+            self.params_array = np.empty((params["mej_dyn"].size, 5))
+            self.theta = params["theta"]
+
+        ### make a dictionary mapping angular bins - e.g. (0, 30) - to arrays of integers.
+        ### these arrays give the indices of self.params_array with theta values inside that angular bin.
+        self.index_dict = {}
+        for angle_index in range(len(self.angles) - 1):
+            theta_lower = self.angles[angle_index]
+            theta_upper = self.angles[angle_index + 1]
+            self.index_dict[(theta_lower, theta_upper)] = np.where((theta_lower <= self.theta) & (self.theta < theta_upper))[0]
+        
+        ### now populate the parameter array
+        #self.params_array[:,0] = params["mej_dyn"]
+        self.params_array[:,0] = params["mej_wind"]*2.81
+        self.params_array[:,1] = params["vej_dyn"]
+        self.params_array[:,2] = params["mej_wind"]
+        self.params_array[:,3] = params["vej_wind"]
+        print(self.params_array.shape)
