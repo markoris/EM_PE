@@ -235,7 +235,7 @@ class kn_interp_angle_no_mej_dyn(kn_interp_angle):
         
         ### now populate the parameter array
         #self.params_array[:,0] = params["mej_dyn"]
-        self.params_array[:,0] = params["mej_wind"]*2.81
+        self.params_array[:,0] = params["mej_wind"]/2.81
         self.params_array[:,1] = params["vej_dyn"]
         self.params_array[:,2] = params["mej_wind"]
         self.params_array[:,3] = params["vej_wind"]
