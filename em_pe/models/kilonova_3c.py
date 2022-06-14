@@ -16,7 +16,7 @@ class kilonova_3c(model_base):
                        "Tc_red",
                        "Tc_purple",
                        "Tc_blue",
-                       "sigma"]
+                       "sigma","distance"]
         bands = ["g", "r", "i", "z", "y", "J", "H", "K"]
         model_base.__init__(self, name, param_names, bands)
         
@@ -47,6 +47,8 @@ class kilonova_3c(model_base):
         self.tdays = None
         self.R_photo = None
         self.T_photo = None
+        self.distance_Mpc =None
+
     
     def set_params(self, params, t_bounds):
         """
@@ -83,6 +85,7 @@ class kilonova_3c(model_base):
         ### empty lists to hold calculated photosphere radius and temperature
         self.R_photo = []
         self.T_photo = []
+        self.distance_Mpc = params["distance"]
 
         ### for each component, compute photosphere radius and temperature
         for mej, vej, Tc, kappa in zip(
@@ -142,4 +145,5 @@ class kilonova_3c(model_base):
         mAB = -2.5 * np.log10(F_nu) - 48.6
         mask = np.isfinite(mAB)
         f = interp1d(self.tdays[mask], mAB[mask], fill_value="extrapolate")
-        return f(tvec_days), self.sigma
+        dist_correct_mag = 5*np.log10(self.distance_Mpc*1e6)-5 # distance in Mpc, factor of 10 pc taken care of with "-5" term
+        return f(tvec_days)+dist_correct_mag, self.sigma
