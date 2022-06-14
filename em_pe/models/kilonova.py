@@ -103,7 +103,8 @@ class kilonova(model_base):
         _R_photo[mask] = vej * t[mask]
         self.R_photo = _R_photo
         self.T_photo = _T_photo
-        self.distance_Mpc=params["distance"]
+        if "distance" in params:
+            self.distance_Mpc=params["distance"]
     
     def evaluate(self, tvec_days, band):
         """
@@ -131,6 +132,8 @@ class kilonova(model_base):
         mAB = -2.5 * np.log10(F_nu) - 48.6
         mask = np.isfinite(mAB)
         f = interp1d(self.tdays[mask], mAB[mask], fill_value="extrapolate")
-        dist_correct_mag = 5*np.log10(self.distance_Mpc*1e6)-5 # distance in Mpc, factor of 10 pc taken care of with "-5" term
+        dist_correct_mag = 0
+        if self.distance_Mpc:
+            dist_correct_mag = 5*np.log10(self.distance_Mpc*1e6)-5 # distance in Mpc, factor of 10 pc taken care of with "-5" term
         return f(tvec_days)+  dist_correct_mag, self.sigma
 
