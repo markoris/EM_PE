@@ -122,13 +122,17 @@ class kn_interp_angle(model_base):
             self.params_array = np.empty((params["mej_dyn"].size, 5))
             self.theta = params["theta"]
 
+        if not(isinstance(self.theta, np.ndarray)):
+            print("Theta argument: ", self.theta)
+            raise Exception(" Error: self.theta is not being passed with sensible units, please check it !")
+
         ### make a dictionary mapping angular bins - e.g. (0, 30) - to arrays of integers.
         ### these arrays give the indices of self.params_array with theta values inside that angular bin.
         self.index_dict = {}
         for angle_index in range(len(self.angles) - 1):
             theta_lower = self.angles[angle_index]
             theta_upper = self.angles[angle_index + 1]
-            self.index_dict[(theta_lower, theta_upper)] = np.where((theta_lower <= self.theta) & (self.theta < theta_upper))[0]
+            self.index_dict[(theta_lower, theta_upper)] = np.where((float(theta_lower) <= self.theta) & (self.theta < float(theta_upper)))[0]
         
         ### now populate the parameter array
         self.params_array[:,0] = params["mej_dyn"]
