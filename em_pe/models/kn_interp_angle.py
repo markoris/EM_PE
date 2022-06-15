@@ -205,7 +205,7 @@ class kn_interp_angle(model_base):
         mags_out = np.empty((self.params_array.shape[0], tvec_days.size))
         mags_err_out = np.empty((self.params_array.shape[0], tvec_days.size))
 
-        if self.distance_Mpc:
+        if not(self.distance_Mpc is None):
             dist_correct_mag = 5*np.log10(self.distance_Mpc*1e6)-5 # distance in Mpc, factor of 10 pc taken care of with "-5" term
         
         ### iterate over light curves (or parameter combinations, depending on how you look at it)
@@ -214,7 +214,7 @@ class kn_interp_angle(model_base):
             mags_interpolator = interp1d(t_interp, mags_interp[i], fill_value="extrapolate")
             mags_err_interpolator = interp1d(t_interp, mags_err_interp[i], fill_value="extrapolate")
             ### evaluate
-            mags_out[i] = mags_interpolator(tvec_days) + dist_correct_mag
+            mags_out[i] = mags_interpolator(tvec_days) + dist_correct_mag[i]
             mags_err_out[i] = mags_err_interpolator(tvec_days)
         
         if self.params_array.shape[0] == 1:
