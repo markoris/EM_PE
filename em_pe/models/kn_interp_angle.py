@@ -74,7 +74,7 @@ def _log_lums_to_mags(log_lums):
 class kn_interp_angle(model_base):
     def __init__(self):
         name = "kn_interp_angle"
-        param_names = ["mej_dyn", "vej_dyn", "mej_wind", "vej_wind", "theta"]
+        param_names = ["mej_dyn", "vej_dyn", "mej_wind", "vej_wind", "theta","distance"]
         bands = ["g", "r", "i", "z", "y", "J", "H", "K"]
         model_base.__init__(self, name, param_names, bands)
         self.vectorized = True
@@ -111,6 +111,7 @@ class kn_interp_angle(model_base):
 
         self.params_array = None # internal storage of parameter array
         self.theta = None # internal storage of theta specifically (for convenience)
+        self.distance_Mpc = None
     
     def set_params(self, params, t_bounds):
         ### params should be a dictionary mapping parameter names to either single floats or 1d arrays.
@@ -139,6 +140,10 @@ class kn_interp_angle(model_base):
         self.params_array[:,1] = params["vej_dyn"]
         self.params_array[:,2] = params["mej_wind"]
         self.params_array[:,3] = params["vej_wind"]
+        if 'distance' in params:
+            self.distance_Mpc = params["distance"]
+        else:
+            self.distance_Mpc = None
     
     def evaluate(self, tvec_days, band):
         print(band + " band:")
@@ -199,6 +204,9 @@ class kn_interp_angle(model_base):
         ### start by creating empty arrays with rows corresponding to rows of self.params_array and columns corresponding to the user-requested times
         mags_out = np.empty((self.params_array.shape[0], tvec_days.size))
         mags_err_out = np.empty((self.params_array.shape[0], tvec_days.size))
+
+        if self.distance_Mpc:
+            dist_correct_mag = 5*np.log10(self.distance_Mpc*1e6)-5 # distance in Mpc, factor of 10 pc taken care of with "-5" term
         
         ### iterate over light curves (or parameter combinations, depending on how you look at it)
         for i in range(self.params_array.shape[0]):
@@ -206,7 +214,7 @@ class kn_interp_angle(model_base):
             mags_interpolator = interp1d(t_interp, mags_interp[i], fill_value="extrapolate")
             mags_err_interpolator = interp1d(t_interp, mags_err_interp[i], fill_value="extrapolate")
             ### evaluate
-            mags_out[i] = mags_interpolator(tvec_days)
+            mags_out[i] = mags_interpolator(tvec_days) + dist_correct_mag
             mags_err_out[i] = mags_err_interpolator(tvec_days)
         
         if self.params_array.shape[0] == 1:
