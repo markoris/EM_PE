@@ -11,7 +11,8 @@ model_dict = {
         "kilonova":kilonova,
         "kilonova_3c":kilonova_3c,
         "kn_interp":kn_interp,
-        "kn_interp_angle":kn_interp_angle
+        "kn_interp_angle":kn_interp_angle,
+        "kn_interp_angle_no_mej_dyn":kn_interp_angle_no_mej_dyn
 }
 
 param_dict = {
