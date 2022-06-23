@@ -1,0 +1,325 @@
+{
+    "GRB211211A": {
+        "photometry": [
+            {
+                "time": 0.27,
+                "band": "g",
+                "e_mag": 0.2,
+                "instrument": "...",
+                "magnitude": 20.34,
+                "system": "AB",
+                "telescope": "MITSuME",
+                "u-time": "dt (days from trigger)",
+                "source": 2
+            },
+            {
+                "time": 0.27,
+                "band": "r",
+                "e_mag": 0.1,
+                "instrument": "...",
+                "magnitude": 20.26,
+                "system": "AB",
+                "telescope": "MITSuME",
+                "u-time": "dt (days from trigger)",
+                "source": 2
+            },
+            {
+                "time": 0.27,
+                "band": "i",
+                "e_mag": 0.3,
+                "instrument": "...",
+                "magnitude": 20.37,
+                "system": "AB",
+                "telescope": "MITSuME",
+                "u-time": "dt (days from trigger)",
+                "source": 2
+            },
+            {
+                "time": 0.43,
+                "band": "r",
+                "e_mag": 0.07,
+                "instrument": "...",
+                "magnitude": 20.25,
+                "system": "AB",
+                "telescope": "NEXT",
+                "u-time": "dt (days from trigger)",
+                "source": 3
+            },
+            {
+                "time": 0.45,
+                "band": "z",
+                "e_mag": 0.3,
+                "instrument": "...",
+                "magnitude": 19.88,
+                "system": "AB",
+                "telescope": "NEXT",
+                "u-time": "dt (days from trigger)",
+                "source": 3
+            },
+            {
+                "time": 0.46,
+                "band": "r",
+                "e_mag": 0.13,
+                "instrument": "...",
+                "magnitude": 20.26,
+                "system": "AB",
+                "telescope": "HCT",
+                "u-time": "dt (days from trigger)",
+                "source": 4
+            },
+            {
+                "time": 0.68,
+                "band": "i",
+                "e_mag": 0.08,
+                "instrument": "CAFOS",
+                "magnitude": 20.75,
+                "system": "AB",
+                "telescope": "CAHA",
+                "u-time": "dt (days from trigger)",
+                "source": 1
+            },
+            {
+                "time": 0.69,
+                "band": "g",
+                "e_mag": 0.04,
+                "instrument": "ALFOSC",
+                "magnitude": 21.0,
+                "system": "AB",
+                "telescope": "NOT",
+                "u-time": "dt (days from trigger)",
+                "source": 1
+            },
+            {
+                "time": 0.69,
+                "band": "r",
+                "e_mag": 0.05,
+                "instrument": "ALFOSC",
+                "magnitude": 20.81,
+                "system": "AB",
+                "telescope": "NOT",
+                "u-time": "dt (days from trigger)",
+                "source": 1
+            },
+            {
+                "time": 0.7,
+                "band": "i",
+                "e_mag": 0.06,
+                "instrument": "ALFOSC",
+                "magnitude": 20.89,
+                "system": "AB",
+                "telescope": "NOT",
+                "u-time": "dt (days from trigger)",
+                "source": 1
+            },
+            {
+                "time": 0.7,
+                "band": "r",
+                "e_mag": 0.09,
+                "instrument": "Sinistro",
+                "magnitude": 21.0,
+                "system": "AB",
+                "telescope": "LCO",
+                "u-time": "dt (days from trigger)",
+                "source": 5
+            },
+            {
+                "time": 1.4,
+                "band": "r",
+                "e_mag": 1.0,
+                "instrument": "...",
+                "magnitude": 21.96,
+                "system": "AB",
+                "telescope": "GMG",
+                "u-time": "dt (days from trigger)",
+                "source": 6
+            },
+            {
+                "time": 1.41,
+                "band": "r",
+                "e_mag": 0.07,
+                "instrument": "4Kx4K",
+                "magnitude": 21.83,
+                "system": "AB",
+                "telescope": "DOT",
+                "u-time": "dt (days from trigger)",
+                "source": 7
+            },
+            {
+                "time": 1.43,
+                "band": "r",
+                "e_mag": 1.0,
+                "instrument": "...",
+                "magnitude": 21.15,
+                "system": "AB",
+                "telescope": "GIT",
+                "u-time": "dt (days from trigger)",
+                "source": 4
+            },
+            {
+                "time": 1.68,
+                "band": "i",
+                "e_mag": 0.13,
+                "instrument": "CAFOS",
+                "magnitude": 22.56,
+                "system": "AB",
+                "telescope": "CAHA",
+                "u-time": "dt (days from trigger)",
+                "source": 1
+            },
+            {
+                "time": 2.56,
+                "band": "r",
+                "e_mag": 1.0,
+                "instrument": "...",
+                "magnitude": 23.06,
+                "system": "AB",
+                "telescope": "Zeiss-1000",
+                "u-time": "dt (days from trigger)",
+                "source": 8
+            },
+            {
+                "time": 2.68,
+                "band": "i",
+                "e_mag": 0.34,
+                "instrument": "CAFOS",
+                "magnitude": 24.56,
+                "system": "AB",
+                "telescope": "CAHA",
+                "u-time": "dt (days from trigger)",
+                "source": 1
+            },
+            {
+                "time": 4.07,
+                "band": "K",
+                "e_mag": 0.14,
+                "instrument": "NIRI",
+                "magnitude": 22.41,
+                "system": "AB",
+                "telescope": "Gemini",
+                "u-time": "dt (days from trigger)",
+                "source": 1
+            },
+            {
+                "time": 4.42,
+                "band": "r",
+                "e_mag": 1.0,
+                "instrument": "4Kx4K",
+                "magnitude": 23.87,
+                "system": "AB",
+                "telescope": "DOT",
+                "u-time": "dt (days from trigger)",
+                "source": 7
+            },
+            {
+                "time": 4.7,
+                "band": "H",
+                "e_mag": 1.0,
+                "instrument": "NICS",
+                "magnitude": 21.89,
+                "system": "AB",
+                "telescope": "TNG",
+                "u-time": "dt (days from trigger)",
+                "source": 9
+            },
+            {
+                "time": 5.1,
+                "band": "K",
+                "e_mag": 0.17,
+                "instrument": "NIRI",
+                "magnitude": 22.4,
+                "system": "AB",
+                "telescope": "Gemini",
+                "u-time": "dt (days from trigger)",
+                "source": 1
+            },
+            {
+                "time": 5.11,
+                "band": "i ",
+                "e_mag": 0.3,
+                "instrument": "GMOS",
+                "magnitude": 26.03,
+                "system": "AB",
+                "telescope": "Gemini",
+                "u-time": "dt (days from trigger)",
+                "source": 1
+            },
+            {
+                "time": 5.96,
+                "band": "J",
+                "e_mag": 0.35,
+                "instrument": "MMIRS",
+                "magnitude": 24.17,
+                "system": "AB",
+                "telescope": "MMT",
+                "u-time": "dt (days from trigger)",
+                "source": 1
+            },
+            {
+                "time": 6.08,
+                "band": "i",
+                "e_mag": 1.0,
+                "instrument": "GMOS",
+                "magnitude": 25.49,
+                "system": "AB",
+                "telescope": "Gemini",
+                "u-time": "dt (days from trigger)",
+                "source": 1
+            },
+            {
+                "time": 6.94,
+                "band": "K",
+                "e_mag": 0.31,
+                "instrument": "MMIRS",
+                "magnitude": 23.43,
+                "system": "AB",
+                "telescope": "MMT",
+                "u-time": "dt (days from trigger)",
+                "source": 1
+            },
+            {
+                "time": 7.98,
+                "band": "K",
+                "e_mag": 0.3,
+                "instrument": "MMIRS",
+                "magnitude": 23.77,
+                "system": "AB",
+                "telescope": "MMT",
+                "u-time": "dt (days from trigger)",
+                "source": 1
+            },
+            {
+                "time": 9.92,
+                "band": "K",
+                "e_mag": 1.0,
+                "instrument": "MMIRS",
+                "magnitude": 22.11,
+                "system": "AB",
+                "telescope": "MMT",
+                "u-time": "dt (days from trigger)",
+                "source": 1
+            },
+            {
+                "time": 17.65,
+                "band": "i",
+                "e_mag": 1.0,
+                "instrument": "ALFOSC",
+                "magnitude": 24.67,
+                "system": "AB",
+                "telescope": "NOT",
+                "u-time": "dt (days from trigger)",
+                "source": 1
+            },
+            {
+                "time": 19.57,
+                "band": "i",
+                "e_mag": 1.0,
+                "instrument": "CAFOS",
+                "magnitude": 24.14,
+                "system": "AB",
+                "telescope": "CAHA",
+                "u-time": "dt (days from trigger)",
+                "source": 1
+            }
+        ]
+    }
+}
