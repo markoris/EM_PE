@@ -162,7 +162,11 @@ class sampler:
                     bounds.append([params[param].llim, params[param].rlim])
         t_bounds = [np.inf, -1 * np.inf] # tmin and tmax for each band
         for band in self.bands_used:
-            t = self.data[band][0]
+            try:
+                t = self.data[band][:, 0]
+            except IndexError:
+                t = np.array(self.data[band][0]).reshape(1, 1)
+            print(band, t, min(t), max(t))
             t_bounds[0] = min(min(t), t_bounds[0])
             t_bounds[1] = max(max(t), t_bounds[1])
         if self.estimate_dist:
