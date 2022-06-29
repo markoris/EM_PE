@@ -24,7 +24,7 @@ M1 = 1.4
 M2 = 1.35
 
 ### general injection parameters
-INJECTION_PARAMS = --n 50 --err 0.15 --sigma ${SIGMA} --time-format mjd --tmin ${TMIN} --tmax ${TMAX} --p dist ${DIST}
+INJECTION_PARAMS = --n 50 --err 0.15 --sigma ${SIGMA} --time-format mjd --tmin ${TMIN} --tmax ${TMAX} --p distance ${DIST}
 EJECTA_PARAMS = --p mej ${MEJ} --p vej ${VEJ} --p kappa 1.0 --p sigma ${SIGMA}
 EJECTA_PARAMS_3C = --p mej_red ${MEJ_RED} --p mej_purple ${MEJ_PURPLE} --p mej_blue ${MEJ_BLUE} --p vej_red ${VEJ_RED} --p vej_purple ${VEJ_PURPLE} --p vej_blue ${VEJ_BLUE} --p Tc_red ${TC_RED} --p Tc_purple ${TC_PURPLE} --p Tc_blue ${TC_BLUE} --p sigma ${SIGMA}
 EJECTA_PARAMS_INTERP = --p mej_dyn ${MEJ_DYN} --p vej_dyn ${VEJ_DYN} --p mej_wind ${MEJ_WIND} --p vej_wind ${VEJ_WIND}
@@ -37,7 +37,7 @@ suffix=
 test_kilonova: directories
 	mkdir -p pe_runs/$(dir_name)$(suffix)/
 	python3 ${EM_PE_INSTALL_DIR}/scripts/generate_data.py --m kilonova --out pe_runs/$(dir_name)$(suffix)/ ${INJECTION_PARAMS} ${EJECTA_PARAMS}
-	echo "time python3 ${EM_PE_INSTALL_DIR}/em_pe/sampler.py --dat ./ --m kilonova -v --f g.txt --f r.txt --f i.txt --f z.txt --f y.txt --f J.txt --f H.txt --f K.txt --min 20 --max 20 --out samples.txt --fixed-param dist 40.0 --fixed-param kappa 1.0 --correlate-dims mej vej --burn-in 10 --beta-start 0.001 --beta-end 0.1 --keep-npts 2000000 --nprocs 8" > pe_runs/$(dir_name)$(suffix)/sample.sh
+	echo "time python3 ${EM_PE_INSTALL_DIR}/em_pe/sampler.py --dat ./ --m kilonova -v --f g.txt --f r.txt --f i.txt --f z.txt --f y.txt --f J.txt --f H.txt --f K.txt --min 20 --max 20 --out samples.txt --fixed-param distance 40.0 --fixed-param kappa 1.0 --correlate-dims mej vej --burn-in 10 --beta-start 0.001 --beta-end 0.1 --keep-npts 2000000 --nprocs 8" > pe_runs/$(dir_name)$(suffix)/sample.sh
 	echo "python3 ${EM_PE_INSTALL_DIR}/em_pe/plot_utils/plot_corner.py --posterior-samples samples.txt --truth-file test_truths.txt --out corner.png --p mej --p vej --p sigma" > pe_runs/$(dir_name)$(suffix)/plot_corner.sh
 	echo "python3 ${EM_PE_INSTALL_DIR}/em_pe/plot_utils/plot_lc.py --log-time --posterior-samples samples.txt --out lc.png --m kilonova --tmin ${TMIN} --tmax ${TMAX} --lc-file g.txt --b g --lc-file r.txt --b r --lc-file i.txt --b i --lc-file z.txt --b z --lc-file y.txt --b y --lc-file J.txt --b J --lc-file H.txt --b H --lc-file K.txt --b K --fixed-param dist 40.0 --fixed-param kappa 1.0" > pe_runs/$(dir_name)$(suffix)/plot_lc.sh
 	chmod u+x pe_runs/$(dir_name)$(suffix)/sample.sh
