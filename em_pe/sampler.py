@@ -212,7 +212,10 @@ class sampler:
         for band in model.bands:
             if band not in self.bands_used:
                 continue
-            t = self.data[band][:,0]
+            try:
+                t = self.data[band][:,0]
+            except IndexError:
+                t = self.data[band][0]
             m, m_err = model.evaluate(t, band)
             temp_data[band][0] = m
             temp_data[band][1] = m_err
