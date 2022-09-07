@@ -162,7 +162,10 @@ class sampler:
                     bounds.append([params[param].llim, params[param].rlim])
         t_bounds = [np.inf, -1 * np.inf] # tmin and tmax for each band
         for band in self.bands_used:
-            t = self.data[band][0]
+            try:
+                t = self.data[band][:, 0]
+            except IndexError:
+                t = np.array(self.data[band][0]).reshape(1, 1)
             t_bounds[0] = min(min(t), t_bounds[0])
             t_bounds[1] = max(max(t), t_bounds[1])
         if self.estimate_dist:
@@ -192,7 +195,7 @@ class sampler:
             from scipy.interpolate import interp2d
             x = sample_array[:, index_dict['mej_dyn']]
             y = sample_array[:, index_dict['mej_wind']]
-            md, mw, r = np.loadtxt('/home/marko.ristic/EM_PE/em_pe/r_process_prior_2d.dat', unpack=True)
+            md, mw, r = np.loadtxt('/home/marko.ristic/EM_PE/em_pe/r_process_prior_2d_wind1.dat', unpack=True)
             r -= np.min(r)
             log_prior_joint = interp2d(md, mw, r, kind='cubic')
             prior_2d = np.array([log_prior_joint(x[i], y[i]) for i in range(x.shape[0])])
