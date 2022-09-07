@@ -16,7 +16,7 @@ model_dict = {
 }
 
 param_dict = {
-        "dist":Distance,
+        "distance":Distance,
         "mej":EjectaMass,
         "mej_red":EjectaMassRed,
         "mej_purple":EjectaMassPurple,

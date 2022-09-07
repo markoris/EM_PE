@@ -49,7 +49,7 @@ class GaussianPriorParameter(Parameter):
 
 class Distance(UniformPriorParameter):
     def __init__(self):
-        UniformPriorParameter.__init__(self, "dist", 10.0, 100.0)
+        UniformPriorParameter.__init__(self, "distance", 10.0, 100.0)
 
 
 class EjectaMass(LogUniformPriorParameter):

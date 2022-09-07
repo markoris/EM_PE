@@ -92,8 +92,8 @@ data_dict = {}
 ### generate the data
 for band in model.bands:
     m, _ = model.evaluate(tdays, band)
-    if 'dist' in params:
-        dist = params['dist']
+    if 'distance' in params:
+        dist = params['distance']
         m += 5*(np.log10(dist*1e6) - 1)
     data = np.empty((4, args.n))
     data[0] = tdays + delta_t
@@ -133,10 +133,11 @@ else:
 
 truths = []
 for param in model.param_names:
+    if param == 'distance': continue
     truths.append(params[param])
 header = " ".join(model.param_names)
 if 'dist' in params:
-    truths.append(params['dist'])
-    header += " dist"
+    truths.append(params['distance'])
+    header += " distance"
 filename = args.out + 'test_truths.txt'
 np.savetxt(filename, truths, header=header)
