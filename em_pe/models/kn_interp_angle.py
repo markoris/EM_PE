@@ -31,6 +31,7 @@ def _load_gp(fname_base):
             continue
         if name =="k2__k2__length_scale":
             one_space = ' '.join(dict_params[name].split())
+            if one_space[1] == ' ': one_space = '['+one_space[2:]
             dict_params_eval[name] = eval(one_space.replace(' ',','))
         else:
             dict_params_eval[name] = eval(dict_params[name])
@@ -82,7 +83,10 @@ class kn_interp_angle(model_base):
         interp_loc = os.environ["INTERP_LOC"]
         if interp_loc[-1] != "/":
             interp_loc += "/"
-        interp_loc += "surrogate_data/2021_Wollaeger_TorusPeanut/"
+        interp_loc += "saved_models/2021_Wollaeger_TorusPeanut/"
+        #interp_loc += "surrogate_data/2021_Wollaeger_TorusPeanut/"
+        #interp_loc += "saved_models/2021_Wollaeger_TorusSphericalWind1/"
+        #interp_loc += "saved_models/2021_Wollaeger_TorusPeanutWind1/"
         
         self.angles = [0, 30, 45, 60, 75, 90]
 
@@ -207,6 +211,7 @@ class kn_interp_angle(model_base):
 
         if not(self.distance_Mpc is None):
             dist_correct_mag = 5*np.log10(self.distance_Mpc*1e6)-5 # distance in Mpc, factor of 10 pc taken care of with "-5" term
+        else: dist_correct_mag=np.zeros(self.params_array.shape[0])
         
         ### iterate over light curves (or parameter combinations, depending on how you look at it)
         for i in range(self.params_array.shape[0]):
@@ -247,7 +252,8 @@ class kn_interp_angle_no_mej_dyn(kn_interp_angle):
         
         ### now populate the parameter array
         #self.params_array[:,0] = params["mej_dyn"]
-        self.params_array[:,0] = params["mej_wind"]/2.81
+        #self.params_array[:,0] = params["mej_wind"]/2.81 # wind2
+        self.params_array[:,0] = params["mej_wind"]/13.90 # wind1
         self.params_array[:,1] = params["vej_dyn"]
         self.params_array[:,2] = params["mej_wind"]
         self.params_array[:,3] = params["vej_wind"]
