@@ -118,7 +118,7 @@ def generate_lc_plot(out, b, tmin, tmax, m=None, sample_file=None, lc_file=None,
                     model.set_params(params, [tmin, tmax])
                     lc_array, lc_err_array = model.evaluate(t, band)
                     for i in range(num_samples):
-                        lc_array[i] += 5.0 * (np.log10(params["dist"][i] * 1.0e6) - 1.0)
+                        lc_array[i] += 5.0 * (np.log10(params["distance"][i] * 1.0e6) - 1.0)
                 else:
                     lc_array = np.empty((num_samples, n_pts))
                     lc_err_array = np.empty((num_samples, n_pts))
@@ -128,7 +128,7 @@ def generate_lc_plot(out, b, tmin, tmax, m=None, sample_file=None, lc_file=None,
                             for [name, val] in fixed_params:
                                 params[name] = val
                         model.set_params(params, [tmin, tmax])
-                        dist = params['dist']
+                        dist = params['distance']
                         lc_array[row], lc_err_array[row] = model.evaluate(t, band)
                         lc_array[row] += 5.0 * (np.log10(dist * 1.0e6) - 1.0)
                 lc_array += offsets[band]
@@ -152,9 +152,14 @@ def generate_lc_plot(out, b, tmin, tmax, m=None, sample_file=None, lc_file=None,
                 print("No matching color for band", band)
                 color=None
             lc = np.loadtxt(fname)
-            t = lc[:,0]
-            err = lc[:,3]
-            lc = lc[:,2] + offsets[band]
+            if lc.ndim == 1:
+                t = lc[0]
+                err = lc[3]
+                lc = lc[2] + offsets[band]
+            else: 
+                t = lc[:,0]
+                err = lc[:,3]
+                lc = lc[:,2] + offsets[band]
             minval = min(minval, np.min(lc))
             maxval = max(maxval, np.max(lc))
             plt.errorbar(t, lc, yerr=err, fmt="none", capsize=2, color=color)
@@ -174,6 +179,7 @@ def generate_lc_plot(out, b, tmin, tmax, m=None, sample_file=None, lc_file=None,
     labels = [str(x) for x in ticks]
     plt.gca().set_xticks(ticks)
     plt.gca().set_xticklabels(labels)
+    if font_size==None: font_size=16
     plt.gca().tick_params(labelsize=font_size)
     plt.ylabel('$m_{AB}$', fontsize=font_size)
     plt.legend(prop={"size":0.75*font_size}, ncol=2, framealpha=0)
