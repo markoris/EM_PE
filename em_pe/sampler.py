@@ -185,6 +185,7 @@ class sampler:
             print('finished')
 
     def _prior(self, sample_array):
+        print('setting priors')
         n, m = sample_array.shape
         ret = np.ones(n)
         index_dict = dict(zip(self.ordered_params, range(len(self.ordered_params))))
@@ -200,7 +201,13 @@ class sampler:
             from scipy.interpolate import interp2d
             x = sample_array[:, index_dict['mej_dyn']]
             y = sample_array[:, index_dict['mej_wind']]
-            md, mw, r = np.loadtxt('/home/marko.ristic/EM_PE/em_pe/r_process_prior_2d_wind1.dat', unpack=True)
+            try:
+                rp_prior_fname = '/home/marko.ristic/EM_PE/em_pe/r_rprocess_prior_2d_wind%s.dat' % (self.morph_comp[-1]) 
+                md, mw, r = np.loadtxt(rp_prior_fname, unpack=True)
+            except:
+                rp_prior_fname ='/home/marko.ristic/EM_PE/em_pe/r_process_prior_2d_wind1.dat'
+                md, mw, r = np.loadtxt(rp_prior_fname, unpack=True)
+            print(rp_prior_fname)
             r -= np.min(r)
             log_prior_joint = interp2d(md, mw, r, kind='cubic')
             prior_2d = np.array([log_prior_joint(x[i], y[i]) for i in range(x.shape[0])])
