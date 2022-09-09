@@ -43,6 +43,7 @@ def _parse_command_line_args():
     parser.add_argument('--gaussian-prior-theta', nargs=2, type=float, help='Mean and std. dev. for Gaussian prior (overrides default uniform prior for angle')
     parser.add_argument('--rprocess-prior', action="store_true", help='Use r-process prior during sampling')
     parser.add_argument('--scale-factor', type=float, default=1.0, help='Scaling factor for r-process prior likelihood evaluation')
+    parser.add_argument('--morph-comp', type=str, default="TP2", help='Morphology and composition specification')
     return parser.parse_args()
 
 class sampler:
@@ -99,6 +100,7 @@ class sampler:
         self.gaussian_prior_theta = gaussian_prior_theta
         self.rprocess_prior = rprocess_prior
         self.scale_factor = scale_factor
+        self.morph_comp = morph_comp
         self.limits = limits if limits is not None else {}
         if ncomp is None:
             self.ncomp = 1
@@ -147,7 +149,10 @@ class sampler:
             print('Initializing models... ', end='')
         ### initialize model objects (one for each parallel process)
         for i in range(self.nprocs):
-            model = model_dict[self.m]()
+            if self.m == "kn_interp_angle":
+                model = model_dict[self.m](self.morph_comp)
+            else:
+                model = model_dict[self.m]()
             self.models.append(model)
             ordered_params = [] # keep track of all parameters used
             bounds = [] # bounds for each parameter
