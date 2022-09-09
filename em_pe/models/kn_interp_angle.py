@@ -83,12 +83,13 @@ class kn_interp_angle(model_base):
         interp_loc = os.environ["INTERP_LOC"]
         if interp_loc[-1] != "/":
             interp_loc += "/"
-        morph_comp_models = {"TP2": "2021_Wollaeger_TorusPeanut",
-                             "TP1": "2021_Wollaeger_TorusPeanutWind1",
-                             "TS2": "2021_Wollaeger_TorusSphericalWind2",
-                             "TS1": "2021_Wollaeger_TorusSphericalWind1",
+        morph_comp_models = {"TP2": "2021_Wollaeger_TorusPeanut/",
+                             "TP1": "2021_Wollaeger_TorusPeanutWind1/",
+                             "TS2": "2021_Wollaeger_TorusSphericalWind2/",
+                             "TS1": "2021_Wollaeger_TorusSphericalWind1/",
                              }
         interp_loc += morph_comp_models[morph_comp]
+        print(interp_loc)
         #interp_loc += "saved_models/2021_Wollaeger_TorusPeanut/"
         #interp_loc += "surrogate_data/2021_Wollaeger_TorusPeanut/"
         #interp_loc += "saved_models/2021_Wollaeger_TorusSphericalWind1/"
