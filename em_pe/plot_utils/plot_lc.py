@@ -30,9 +30,10 @@ def _parse_command_line_args():
     parser.add_argument('--log-time', action='store_true', help='Use a log scale for time axis')
     parser.add_argument('--font-size', type=float, help="Font size for plotting")
     parser.add_argument('--late-start', action='store_true', help='Start at 0.125 or 0.5 days for light curve plotting.')
+    parser.add_argument('--morph-comp', type=str, help='Morphology/composition of model')
     return parser.parse_args()
 
-def generate_lc_plot(out, b, tmin, tmax, m=None, sample_file=None, lc_file=None, fixed_params=None, log_time=False, font_size=16, late_start=False):
+def generate_lc_plot(out, b, tmin, tmax, m=None, sample_file=None, lc_file=None, fixed_params=None, log_time=False, font_size=16, late_start=False, morph_comp="TP2"):
     '''
     Generate a lightcurve plot
 
@@ -64,7 +65,11 @@ def generate_lc_plot(out, b, tmin, tmax, m=None, sample_file=None, lc_file=None,
     offsets = {"K":0, "H":1, "J":2, "y":3, "z":4, "i":5, "r":6, "g":7}
     plt.figure(figsize=(12, 8))
     if m is not None:
-        model = model_dict[m]()
+        #model = model_dict[m](self)
+        if m == "kn_interp_angle":
+            model = model_dict[m](morph_comp)
+        else:
+            model = model_dict[m](self)
         with open(sample_file) as f:
             ### the "header" contains the column names
             header = f.readline().strip().split(' ')
@@ -251,11 +256,12 @@ def main():
     fixed_params = args.fixed_param
     font_size = args.font_size
     late_start = args.late_start
+    morph_comp = args.morph_comp
     if fixed_params is not None:
         for i in range(len(fixed_params)):
             fixed_params[i][1] = float(fixed_params[i][1])
     log_time = args.log_time
-    generate_lc_plot(out, b, tmin, tmax, m=m, sample_file=sample_file, lc_file=lc_file, fixed_params=fixed_params, log_time=log_time, font_size=font_size, late_start=late_start)
+    generate_lc_plot(out, b, tmin, tmax, m=m, sample_file=sample_file, lc_file=lc_file, fixed_params=fixed_params, log_time=log_time, font_size=font_size, late_start=late_start, morph_comp=morph_comp)
 
 if __name__ == '__main__':
     main()
