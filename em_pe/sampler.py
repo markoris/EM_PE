@@ -185,7 +185,6 @@ class sampler:
             print('finished')
 
     def _prior(self, sample_array):
-        print('setting priors')
         n, m = sample_array.shape
         ret = np.ones(n)
         index_dict = dict(zip(self.ordered_params, range(len(self.ordered_params))))
@@ -205,8 +204,10 @@ class sampler:
                 rp_prior_fname = '/home/marko.ristic/EM_PE/em_pe/r_rprocess_prior_2d_wind%s.dat' % (self.morph_comp[-1]) 
                 md, mw, r = np.loadtxt(rp_prior_fname, unpack=True)
             except:
-                rp_prior_fname ='/home/marko.ristic/EM_PE/em_pe/r_process_prior_2d_wind1.dat'
+                rp_prior_fname ='/home/marko.ristic/EM_PE/em_pe/r_process_prior_2d_wind2.dat'
                 md, mw, r = np.loadtxt(rp_prior_fname, unpack=True)
+            print(self.morph_comp)
+            print(self.morph_comp[-1])
             print(rp_prior_fname)
             r -= np.min(r)
             log_prior_joint = interp2d(md, mw, r, kind='cubic')
