@@ -66,7 +66,7 @@ test_kn_interp: directories
 
 test_kn_interp_angle: directories
 	mkdir -p pe_runs/$(dir_name)$(suffix)/
-	ppython3 ${EM_PE_INSTALL_DIR}/scripts/generate_data.py --m kn_interp_angle --out pe_runs/$(dir_name)$(suffix)/ ${INJECTION_PARAMS_INTERP} ${EJECTA_PARAMS_INTERP} --p theta 20.0
+	python3 ${EM_PE_INSTALL_DIR}/scripts/generate_data.py --m kn_interp_angle --out pe_runs/$(dir_name)$(suffix)/ ${INJECTION_PARAMS_INTERP} ${EJECTA_PARAMS_INTERP} --p theta 20.0
 	echo "time python3 -u ${EM_PE_INSTALL_DIR}/em_pe/sampler.py --dat ./ --m kn_interp_angle -v --f g.txt --f r.txt --f i.txt --f z.txt --f y.txt --f J.txt --f H.txt --f K.txt --min 40 --max 40 --out samples.txt --fixed-param dist 40.0 --burn-in 10 --beta-start 0.001 --beta-end 0.1 --keep-npts 1000000 --set-limit mej_dyn 0.01 0.03 --set-limit mej_wind 0.015 0.035" > pe_runs/$(dir_name)$(suffix)/sample.sh
 	echo "python3 ${EM_PE_INSTALL_DIR}/em_pe/plot_utils/plot_corner.py --posterior-samples samples.txt --truth-file test_truths.txt --out corner.png --p mej_dyn --p vej_dyn --p mej_wind --p vej_wind --p theta" > pe_runs/$(dir_name)$(suffix)/plot_corner.sh
 	echo "python3 ${EM_PE_INSTALL_DIR}/em_pe/plot_utils/plot_lc.py --log-time --posterior-samples samples.txt --out lc.png --m kn_interp_angle --tmin ${TMIN} --tmax 6.7 --lc-file g.txt --b g --lc-file r.txt --b r --lc-file i.txt --b i --lc-file z.txt --b z --lc-file y.txt --b y --lc-file J.txt --b J --lc-file H.txt --b H --lc-file K.txt --b K --fixed-param dist 40.0" > pe_runs/$(dir_name)$(suffix)/plot_lc.sh
@@ -103,16 +103,16 @@ GW170817_kn_interp_angle: directories
 	mkdir -p pe_runs/$(dir_name)$(suffix)/
 	python3 ${EM_PE_INSTALL_DIR}/em_pe/parser/parse_json.py --t0 ${GW170817_START} --tmax 37 --f ${EM_PE_INSTALL_DIR}/Data/GW170817.json --b g --b r --b i --b z --b y --b J --b H --b K --out pe_runs/$(dir_name)$(suffix)/
 	echo "#!/bin/sh" > pe_runs/$(dir_name)$(suffix)/sample.sh
-	echo "time python3 -u ${EM_PE_INSTALL_DIR}/em_pe/sampler.py --dat ./ --m kn_interp_angle -v --f g.txt --f r.txt --f i.txt --f z.txt --f y.txt --f J.txt --f H.txt --f K.txt --min 15 --max 15 --out samples.txt --fixed-param dist 40.0 --burn-in 5 --beta-start 0.005 --beta-end 0.1 --keep-npts 1000000 --gaussian-prior-theta 20.0 5.0 --rprocess-prior --scale-factor 0.1" >> pe_runs/$(dir_name)$(suffix)/sample.sh
+	echo "time python3 -u ${EM_PE_INSTALL_DIR}/em_pe/sampler.py --dat ./ --m kn_interp_angle -v --f g.txt --f r.txt --f i.txt --f z.txt --f y.txt --f J.txt --f H.txt --f K.txt --min 15 --max 15 --out samples.txt --fixed-param distance 40.0 --burn-in 5 --beta-start 0.005 --beta-end 0.1 --keep-npts 1000000 --gaussian-prior-theta 20.0 5.0 --rprocess-prior --scale-factor 0.1" >> pe_runs/$(dir_name)$(suffix)/sample.sh
 	echo "python3 ${EM_PE_INSTALL_DIR}/em_pe/plot_utils/plot_corner.py --posterior-samples samples-combined.txt --out corner.png --p mej_dyn --p mej_wind --p vej_dyn --p vej_wind --p theta --log-mass" > pe_runs/$(dir_name)$(suffix)/plot_corner.sh
-	echo "python3 ${EM_PE_INSTALL_DIR}/em_pe/plot_utils/plot_lc.py --log-time --posterior-samples samples-combined.txt --out lc.png --m kn_interp_angle --tmin ${TMIN} --tmax 20 --lc-file g.txt --b g --lc-file r.txt --b r --lc-file i.txt --b i --lc-file z.txt --b z --lc-file y.txt --b y --lc-file J.txt --b J --lc-file H.txt --b H --lc-file K.txt --b K --fixed-param dist 40.0" > pe_runs/$(dir_name)$(suffix)/plot_lc.sh
+	echo "python3 -u ${EM_PE_INSTALL_DIR}/em_pe/plot_utils/plot_lc.py --log-time --posterior-samples samples.txt --out lc.pdf --m kn_interp_angle --tmin ${TMIN} --tmax 20 --lc-file g.txt --b g --lc-file r.txt --b r --lc-file i.txt --b i --lc-file z.txt --b z --lc-file y.txt --b y --lc-file J.txt --b J --lc-file H.txt --b H --lc-file K.txt --b K --fixed-param distance 40.0 --morph-comp TP2" > pe_runs/$(dir_name)$(suffix)/plot_lc.sh
 	echo "python3 ${EM_PE_INSTALL_DIR}/scripts/combine_posterior_samples.py --input-file samples-1.txt samples-2.txt samples-3.txt samples-4.txt samples-5.txt samples-6.txt --keep-npts 1000000" > pe_runs/$(dir_name)$(suffix)/combine.sh
 	chmod u+x pe_runs/$(dir_name)$(suffix)/sample.sh
 	chmod u+x pe_runs/$(dir_name)$(suffix)/plot_corner.sh
 	chmod u+x pe_runs/$(dir_name)$(suffix)/plot_lc.sh
 	chmod u+x pe_runs/$(dir_name)$(suffix)/combine.sh
 	#cp ~/template.sub pe_runs/$(dir_name)$(suffix)/run.sub
-	sed -i 's/samples.txt/samples-\$$1.txt/' pe_runs/$(dir_name)$(suffix)/sample.sh
+	#sed -i 's/samples.txt/samples-\$$1.txt/' pe_runs/$(dir_name)$(suffix)/sample.sh
 
 ### GRB211211A
 
