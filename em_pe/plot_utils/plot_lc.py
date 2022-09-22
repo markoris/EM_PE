@@ -122,8 +122,9 @@ def generate_lc_plot(out, b, tmin, tmax, m=None, sample_file=None, lc_file=None,
                             params[name] = np.ones(num_samples) * val
                     model.set_params(params, [tmin, tmax])
                     lc_array, lc_err_array = model.evaluate(t, band)
-                    for i in range(num_samples):
-                        lc_array[i] += 5.0 * (np.log10(params["distance"][i] * 1.0e6) - 1.0)
+                    if m != "kn_interp_angle":
+                        for i in range(num_samples):
+                            lc_array[i] += 5.0 * (np.log10(params["distance"][i] * 1.0e6) - 1.0)
                 else:
                     lc_array = np.empty((num_samples, n_pts))
                     lc_err_array = np.empty((num_samples, n_pts))
@@ -135,7 +136,8 @@ def generate_lc_plot(out, b, tmin, tmax, m=None, sample_file=None, lc_file=None,
                         model.set_params(params, [tmin, tmax])
                         dist = params['distance']
                         lc_array[row], lc_err_array[row] = model.evaluate(t, band)
-                        lc_array[row] += 5.0 * (np.log10(dist * 1.0e6) - 1.0)
+                        if m != "kn_interp_angle":
+                            lc_array[row] += 5.0 * (np.log10(dist * 1.0e6) - 1.0)
                 lc_array += offsets[band]
                 #min_lc = np.amin(lc_array, axis=0)
                 #max_lc = np.amax(lc_array, axis=0)
