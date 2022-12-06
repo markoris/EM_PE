@@ -1,0 +1,807 @@
+{
+    "GRB130603B": {
+        "schema": "https://github.com/astrocatalogs/supernovae/blob/d3ef5fc/SCHEMA.md",
+        "name": "GRB130603B",
+        "sources": [
+            {
+                "name": "2016A&A...594A..13P",
+                "bibcode": "2016A&A...594A..13P",
+                "reference": "Planck Collaboration et al. (2016)",
+                "alias": "1"
+            },
+            {
+                "name": "2014ApJ...780..118F",
+                "bibcode": "2014ApJ...780..118F",
+                "reference": "Fong et al. (2014)",
+                "alias": "2"
+            },
+            {
+                "name": "2011ApJ...737..103S",
+                "bibcode": "2011ApJ...737..103S",
+                "reference": "Schlafly & Finkbeiner (2011)",
+                "alias": "3"
+            },
+            {
+                "name": "The Open Supernova Catalog",
+                "bibcode": "2017ApJ...835...64G",
+                "reference": "Guillochon et al. (2017)",
+                "secondary": true,
+                "url": "https://sne.space",
+                "alias": "4"
+            }
+        ],
+        "alias": [
+            {
+                "value": "GRB130603B",
+                "source": "2"
+            }
+        ],
+        "claimedtype": [
+            {
+                "value": "Kilonova?",
+                "source": "2"
+            }
+        ],
+        "comovingdist": [
+            {
+                "value": "1440",
+                "derived": true,
+                "u_value": "Mpc",
+                "source": "1,2,4"
+            }
+        ],
+        "dec": [
+            {
+                "value": "+17:04:16.9",
+                "u_value": "degrees",
+                "source": "2"
+            }
+        ],
+        "discoverdate": [
+            {
+                "value": "2013/06/03",
+                "derived": true,
+                "source": "2,4"
+            }
+        ],
+        "ebv": [
+            {
+                "value": "0.0199",
+                "derived": true,
+                "e_value": "0.0006",
+                "source": "3,4"
+            }
+        ],
+        "lumdist": [
+            {
+                "value": "1953",
+                "derived": true,
+                "u_value": "Mpc",
+                "source": "1,2,4"
+            }
+        ],
+        "maxabsmag": [
+            {
+                "value": "-20.73",
+                "derived": true,
+                "source": "1,2,4"
+            }
+        ],
+        "maxappmag": [
+            {
+                "value": "20.39",
+                "derived": true,
+                "source": "2,4"
+            }
+        ],
+        "maxband": [
+            {
+                "value": "z",
+                "derived": true,
+                "source": "2,4"
+            }
+        ],
+        "maxdate": [
+            {
+                "value": "2013/06/03",
+                "derived": true,
+                "source": "2,4"
+            }
+        ],
+        "maxvisualabsmag": [
+            {
+                "value": "-19.55",
+                "derived": true,
+                "source": "1,2,4"
+            }
+        ],
+        "maxvisualappmag": [
+            {
+                "value": "21.9",
+                "derived": true,
+                "source": "2,4"
+            }
+        ],
+        "maxvisualband": [
+            {
+                "value": "g",
+                "derived": true,
+                "source": "2,4"
+            }
+        ],
+        "maxvisualdate": [
+            {
+                "value": "2013/06/03",
+                "derived": true,
+                "source": "2,4"
+            }
+        ],
+        "ra": [
+            {
+                "value": "11:28:48.15",
+                "u_value": "hours",
+                "source": "2"
+            }
+        ],
+        "redshift": [
+            {
+                "value": "0.356",
+                "source": "2"
+            }
+        ],
+        "velocity": [
+            {
+                "value": "88600",
+                "u_value": "km/s",
+                "source": "4"
+            }
+        ],
+        "photometry": [
+            {
+                "time": "56446.66718981",
+                "band": "g",
+                "fluxdensity": "199.5",
+                "instrument": "LSSTCam",
+                "magnitude": "20.7",
+                "telescope": "LSST",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "upperlimit": true,
+                "upperlimitsigma": "3.0",
+                "source": "converted from V-band observation",
+                "system": "AB",
+                "e_magnitude": "2"
+            },
+            {
+                "time": "56446.66718981",
+                "band": "r",
+                "fluxdensity": "199.5",
+                "instrument": "LSSTCam",
+                "magnitude": "20.6",
+                "telescope": "LSST",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "upperlimit": true,
+                "upperlimitsigma": "3.0",
+                "source": "converted from V-band observation",
+                "system": "AB",
+                "e_magnitude": "2"
+            },
+            {
+                "time": "56446.74818981",
+                "band": "g",
+                "fluxdensity": "53.95",
+                "instrument": "LSSTCam",
+                "magnitude": "22.1",
+                "telescope": "LSST",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "upperlimit": true,
+                "upperlimitsigma": "3.0",
+                "source": "converted from V-band observation",
+                "system": "AB",
+                "e_magnitude": "2"
+            },
+            {
+                "time": "56446.74818981",
+                "band": "r",
+                "fluxdensity": "53.95",
+                "instrument": "LSSTCam",
+                "magnitude": "22.0",
+                "telescope": "LSST",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "upperlimit": true,
+                "upperlimitsigma": "3.0",
+                "source": "converted from V-band observation",
+                "system": "AB",
+                "e_magnitude": "2"
+            },
+            {
+                "time": "56446.89918981",
+                "band": "r",
+                "e_fluxdensity": "0.23",
+                "e_lower_magnitude": "0.02000",
+                "e_upper_magnitude": "0.01975",
+                "fluxdensity": "12.59",
+                "instrument": "MOSCA",
+                "magnitude": "21.150",
+                "telescope": "NOT",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "source": "2",
+                "e_magnitude": "0.019875"
+            },
+            {
+                "time": "56446.90918981",
+                "band": "z",
+                "e_fluxdensity": "1.36",
+                "e_lower_magnitude": "0.06000",
+                "e_upper_magnitude": "0.05675",
+                "fluxdensity": "25.35",
+                "instrument": "ACAM",
+                "magnitude": "20.390",
+                "telescope": "WHT",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "source": "2",
+                "e_magnitude": "0.058374999999999996"
+            },
+            {
+                "time": "56446.92918981",
+                "band": "i",
+                "e_fluxdensity": "0.88",
+                "e_lower_magnitude": "0.05975",
+                "e_upper_magnitude": "0.05650",
+                "fluxdensity": "16.44",
+                "instrument": "ACAM",
+                "magnitude": "20.860",
+                "telescope": "WHT",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "source": "2",
+                "e_magnitude": "0.058124999999999996"
+            },
+            {
+                "time": "56446.93918981",
+                "band": "g",
+                "e_fluxdensity": "0.73",
+                "e_lower_magnitude": "0.09975",
+                "e_upper_magnitude": "0.09125",
+                "fluxdensity": "8.32",
+                "instrument": "LSSTCam",
+                "magnitude": "22.1",
+                "telescope": "LSST",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "source": "converted from V-band observation",
+                "system": "AB",
+                "e_magnitude": "0.0955"
+            },
+            {
+                "time": "56446.93918981",
+                "band": "r",
+                "e_fluxdensity": "0.73",
+                "e_lower_magnitude": "0.09975",
+                "e_upper_magnitude": "0.09125",
+                "fluxdensity": "8.32",
+                "instrument": "LSSTCam",
+                "magnitude": "21.4",
+                "telescope": "LSST",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "source": "converted from V-band observation",
+                "system": "AB",
+                "e_magnitude": "0.0955"
+            },
+            {
+                "time": "56446.94918981",
+                "band": "g",
+                "e_fluxdensity": "0.34",
+                "e_lower_magnitude": "0.06000",
+                "e_upper_magnitude": "0.05700",
+                "fluxdensity": "6.31",
+                "instrument": "ACAM",
+                "magnitude": "21.90",
+                "telescope": "WHT",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "source": "2",
+                "e_magnitude": "0.058499999999999996"
+            },
+            {
+                "time": "56446.94918981",
+                "band": "r",
+                "e_fluxdensity": "0.20",
+                "e_lower_magnitude": "0.02000",
+                "e_upper_magnitude": "0.01975",
+                "fluxdensity": "10.96",
+                "instrument": "OSIRIS",
+                "magnitude": "21.300",
+                "telescope": "GTC",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "source": "2",
+                "e_magnitude": "0.019875"
+            },
+            {
+                "time": "56446.98918981",
+                "band": "g",
+                "e_fluxdensity": "0.19",
+                "e_lower_magnitude": "0.03975",
+                "e_upper_magnitude": "0.03825",
+                "fluxdensity": "5.30",
+                "instrument": "GMOS",
+                "magnitude": "22.09",
+                "telescope": "Gemini-South",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "source": "2",
+                "e_magnitude": "0.039"
+            },
+            {
+                "time": "56446.99918981",
+                "band": "r",
+                "e_fluxdensity": "0.14",
+                "e_lower_magnitude": "0.01775",
+                "e_upper_magnitude": "0.01750",
+                "fluxdensity": "8.64",
+                "instrument": "IMACS",
+                "magnitude": "21.56",
+                "telescope": "Magellan/Baade",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "source": "2",
+                "e_magnitude": "0.017625000000000002"
+            },
+            {
+                "time": "56447.02918981",
+                "band": "i",
+                "e_fluxdensity": "1.18",
+                "e_lower_magnitude": "0.11000",
+                "e_upper_magnitude": "0.10000",
+                "fluxdensity": "12.25",
+                "instrument": "GMOS",
+                "magnitude": "21.180",
+                "telescope": "Gemini-South",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "source": "2",
+                "e_magnitude": "0.10500000000000001"
+            },
+            {
+                "time": "56447.25918981",
+                "band": "K",
+                "e_fluxdensity": "1.32",
+                "e_lower_magnitude": "0.11025",
+                "e_upper_magnitude": "0.10000",
+                "fluxdensity": "13.68",
+                "instrument": "WFCAM",
+                "magnitude": "21.060",
+                "telescope": "UKIRT",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "source": "2",
+                "e_magnitude": "0.105125"
+            },
+            {
+                "time": "56447.25918981",
+                "band": "z",
+                "e_fluxdensity": "0.18",
+                "e_lower_magnitude": "0.03025",
+                "e_upper_magnitude": "0.02950",
+                "fluxdensity": "6.54",
+                "instrument": "GMOS",
+                "magnitude": "21.86",
+                "telescope": "Gemini-North",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "source": "2",
+                "e_magnitude": "0.029875"
+            },
+            {
+                "time": "56447.26918981",
+                "band": "J",
+                "e_fluxdensity": "1.12",
+                "e_lower_magnitude": "0.1395",
+                "e_upper_magnitude": "0.1225",
+                "fluxdensity": "9.29",
+                "instrument": "WFCAM",
+                "magnitude": "21.48",
+                "telescope": "UKIRT",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "source": "2",
+                "e_magnitude": "0.131"
+            },
+            {
+                "time": "56447.26918981",
+                "band": "i",
+                "e_fluxdensity": "0.12",
+                "e_lower_magnitude": "0.02925",
+                "e_upper_magnitude": "0.02850",
+                "fluxdensity": "4.53",
+                "instrument": "GMOS",
+                "magnitude": "22.26",
+                "telescope": "Gemini-North",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "source": "2",
+                "e_magnitude": "0.028875"
+            },
+            {
+                "time": "56447.27918981",
+                "band": "g",
+                "e_fluxdensity": "0.06",
+                "e_lower_magnitude": "0.04150",
+                "e_upper_magnitude": "0.04000",
+                "fluxdensity": "1.60",
+                "instrument": "GMOS",
+                "magnitude": "23.39",
+                "telescope": "Gemini-North",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "source": "2",
+                "e_magnitude": "0.04075"
+            },
+            {
+                "time": "56447.27918981",
+                "band": "r",
+                "e_fluxdensity": "0.08",
+                "e_lower_magnitude": "0.03050",
+                "e_upper_magnitude": "0.02975",
+                "fluxdensity": "2.88",
+                "instrument": "GMOS",
+                "magnitude": "22.75",
+                "telescope": "Gemini-North",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "source": "2",
+                "e_magnitude": "0.030125"
+            },
+            {
+                "time": "56447.95918981",
+                "band": "i",
+                "fluxdensity": "0.58",
+                "instrument": "GMOS",
+                "magnitude": "23.30",
+                "telescope": "Gemini-South",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "upperlimit": true,
+                "upperlimitsigma": "3.0",
+                "source": "2",
+                "e_magnitude": "2"
+            },
+            {
+                "time": "56447.95918981",
+                "band": "r",
+                "fluxdensity": "0.30",
+                "instrument": "GMOS",
+                "magnitude": "24.01",
+                "telescope": "Gemini-South",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "upperlimit": true,
+                "upperlimitsigma": "3.0",
+                "source": "2",
+                "e_magnitude": "2"
+            },
+            {
+                "time": "56447.99918981",
+                "band": "r",
+                "fluxdensity": "0.46",
+                "instrument": "IMACS",
+                "magnitude": "23.55",
+                "telescope": "Magellan/Baade",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "upperlimit": true,
+                "upperlimitsigma": "3.0",
+                "source": "2",
+                "e_magnitude": "2"
+            },
+            {
+                "time": "56448.24918981",
+                "band": "g",
+                "fluxdensity": "0.19",
+                "instrument": "GMOS",
+                "magnitude": "24.51",
+                "telescope": "Gemini-North",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "upperlimit": true,
+                "upperlimitsigma": "3.0",
+                "source": "2",
+                "e_magnitude": "2"
+            },
+            {
+                "time": "56448.25918981",
+                "band": "r",
+                "e_fluxdensity": "0.05",
+                "e_lower_magnitude": "0.2952",
+                "e_upper_magnitude": "0.2320",
+                "fluxdensity": "0.21",
+                "instrument": "GMOS",
+                "magnitude": "25.59",
+                "telescope": "Gemini-North",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "source": "2",
+                "e_magnitude": "0.2636"
+            },
+            {
+                "time": "56448.26918981",
+                "band": "J",
+                "fluxdensity": "1.25",
+                "instrument": "WFCAM",
+                "magnitude": "22.46",
+                "telescope": "UKIRT",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "upperlimit": true,
+                "upperlimitsigma": "3.0",
+                "source": "2",
+                "e_magnitude": "2"
+            },
+            {
+                "time": "56448.26918981",
+                "band": "i",
+                "fluxdensity": "0.48",
+                "instrument": "GMOS",
+                "magnitude": "23.50",
+                "telescope": "Gemini-North",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "upperlimit": true,
+                "upperlimitsigma": "3.0",
+                "source": "2",
+                "e_magnitude": "2"
+            },
+            {
+                "time": "56448.27918981",
+                "band": "z",
+                "fluxdensity": "1.00",
+                "instrument": "GMOS",
+                "magnitude": "22.71",
+                "telescope": "Gemini-North",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "upperlimit": true,
+                "upperlimitsigma": "3.0",
+                "source": "2",
+                "e_magnitude": "2"
+            },
+            {
+                "time": "56448.97918981",
+                "band": "J",
+                "fluxdensity": "1.25",
+                "instrument": "HAWK-I",
+                "magnitude": "22.46",
+                "telescope": "VLT",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "upperlimit": true,
+                "upperlimitsigma": "3.0",
+                "source": "2",
+                "e_magnitude": "2"
+            },
+            {
+                "time": "56449.91918981",
+                "band": "r",
+                "fluxdensity": "0.33",
+                "instrument": "OSIRIS",
+                "magnitude": "23.91",
+                "telescope": "GTC",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "upperlimit": true,
+                "upperlimitsigma": "3.0",
+                "source": "2",
+                "e_magnitude": "2"
+            },
+            {
+                "time": "56450.91918981",
+                "band": "r",
+                "fluxdensity": "0.23",
+                "instrument": "OSIRIS",
+                "magnitude": "24.30",
+                "telescope": "GTC",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "upperlimit": true,
+                "upperlimitsigma": "3.0",
+                "source": "2",
+                "e_magnitude": "2"
+            },
+            {
+                "time": "56453.95918981",
+                "band": "J",
+                "fluxdensity": "1.45",
+                "instrument": "HAWK-I",
+                "magnitude": "22.30",
+                "telescope": "VLT",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "upperlimit": true,
+                "upperlimitsigma": "3.0",
+                "source": "2",
+                "e_magnitude": "2"
+            },
+            {
+                "time": "56454.88918981",
+                "band": "r",
+                "fluxdensity": "1.15",
+                "instrument": "DOLoRes",
+                "magnitude": "22.56",
+                "telescope": "TNG",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "upperlimit": true,
+                "upperlimitsigma": "3.0",
+                "source": "2",
+                "e_magnitude": "2"
+            },
+            {
+                "time": "56454.90918981",
+                "band": "i",
+                "fluxdensity": "0.52",
+                "instrument": "DOLoRes",
+                "magnitude": "23.42",
+                "telescope": "TNG",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "upperlimit": true,
+                "upperlimitsigma": "3.0",
+                "source": "2",
+                "e_magnitude": "2"
+            },
+            {
+                "time": "56455.06918981",
+                "band": "r",
+                "fluxdensity": "0.40",
+                "instrument": "IMACS",
+                "magnitude": "23.70",
+                "telescope": "Magellan/Baade",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "upperlimit": true,
+                "upperlimitsigma": "3.0",
+                "source": "2",
+                "e_magnitude": "2"
+            },
+            {
+                "time": "56456.02918981",
+                "band": "g",
+                "fluxdensity": "0.03",
+                "instrument": "LSSTCam",
+                "magnitude": "26.0",
+                "telescope": "LSST",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "upperlimit": true,
+                "upperlimitsigma": "3.0",
+                "source": "converted from F606W-band observation",
+                "system": "AB",
+                "e_magnitude": "2"
+            },
+            {
+                "time": "56456.02918981",
+                "band": "r",
+                "fluxdensity": "0.03",
+                "instrument": "LSSTCam",
+                "magnitude": "26.1",
+                "telescope": "LSST",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "upperlimit": true,
+                "upperlimitsigma": "3.0",
+                "source": "converted from F606W-band observation",
+                "system": "AB",
+                "e_magnitude": "2"
+            },
+            {
+                "time": "56456.02918981",
+                "band": "i",
+                "fluxdensity": "0.03",
+                "instrument": "LSSTCam",
+                "magnitude": "25.7",
+                "telescope": "LSST",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "upperlimit": true,
+                "upperlimitsigma": "3.0",
+                "source": "converted from F606W-band observation",
+                "system": "AB",
+                "e_magnitude": "2"
+            },
+            {
+                "time": "56456.06918981",
+                "band": "H",
+                "e_fluxdensity": "0.03",
+                "e_lower_magnitude": "0.2108",
+                "e_upper_magnitude": "0.1765",
+                "fluxdensity": "0.17",
+                "instrument": "2MASS",
+                "magnitude": "25.6",
+                "telescope": "2MASS",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "source": "converted from F160W-band observation",
+                "system": "AB",
+                "e_magnitude": "0.19365"
+            },
+            {
+                "time": "56467.91918981",
+                "band": "r",
+                "fluxdensity": "1.49",
+                "instrument": "DOLoRes",
+                "magnitude": "22.27",
+                "telescope": "TNG",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "upperlimit": true,
+                "upperlimitsigma": "3.0",
+                "source": "2",
+                "e_magnitude": "2"
+            },
+            {
+                "time": "56467.94918981",
+                "band": "i",
+                "fluxdensity": "0.93",
+                "instrument": "DOLoRes",
+                "magnitude": "22.79",
+                "telescope": "TNG",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "upperlimit": true,
+                "upperlimitsigma": "3.0",
+                "source": "2",
+                "e_magnitude": "2"
+            },
+            {
+                "time": "56468.17918981",
+                "band": "r",
+                "fluxdensity": "1.91",
+                "instrument": "MMTCam",
+                "magnitude": "22.00",
+                "telescope": "MMT",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "upperlimit": true,
+                "upperlimitsigma": "3.0",
+                "source": "2",
+                "e_magnitude": "2"
+            },
+            {
+                "time": "56476.22918981",
+                "band": "H",
+                "fluxdensity": "0.10",
+                "instrument": "2MASS",
+                "magnitude": "25.0",
+                "telescope": "2MASS",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "upperlimit": true,
+                "upperlimitsigma": "3.0",
+                "source": "converted from F160W-band observation",
+                "system": "AB",
+                "e_magnitude": "2"
+            },
+            {
+                "time": "56483.99918981",
+                "band": "r",
+                "fluxdensity": "0.40",
+                "instrument": "LDSS3",
+                "magnitude": "23.70",
+                "telescope": "Magellan/Clay",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "upperlimit": true,
+                "upperlimitsigma": "3.0",
+                "source": "2",
+                "e_magnitude": "2"
+            }
+        ]
+    }
+}
