@@ -1,0 +1,239 @@
+{
+    "GRB150101B": {
+        "schema": "https://github.com/astrocatalogs/supernovae/blob/d3ef5fc/SCHEMA.md",
+        "name": "GRB150101B",
+        "sources": [
+            {
+                "name": "Troja et al. (2018)",
+                "bibcode": "2018NatCo...9.4089T",
+                "reference": "Troja et al. (2018)",
+                "url": "https://www.nature.com/articles/s41467-018-06558-7",
+                "alias": "1"
+            },
+            {
+                "name": "2016A&A...594A..13P",
+                "bibcode": "2016A&A...594A..13P",
+                "reference": "Planck Collaboration et al. (2016)",
+                "alias": "2"
+            },
+            {
+                "name": "The Open Supernova Catalog",
+                "bibcode": "2017ApJ...835...64G",
+                "reference": "Guillochon et al. (2017)",
+                "secondary": true,
+                "url": "https://sne.space",
+                "alias": "3"
+            }
+        ],
+        "alias": [
+            {
+                "value": "GRB150101B",
+                "source": "1"
+            }
+        ],
+        "claimedtype": [
+            {
+                "value": "Kilonova?",
+                "source": "1"
+            }
+        ],
+        "comovingdist": [
+            {
+                "value": "574.6",
+                "derived": true,
+                "u_value": "Mpc",
+                "source": "1,2,3"
+            }
+        ],
+        "dec": [
+            {
+                "value": "+10:56:03.0",
+                "u_value": "degrees",
+                "source": "1"
+            }
+        ],
+        "discoverdate": [
+            {
+                "value": "2015/01/03",
+                "derived": true,
+                "source": "1,3"
+            }
+        ],
+        "lumdist": [
+            {
+                "value": "651.67",
+                "derived": true,
+                "u_value": "Mpc",
+                "source": "1,2,3"
+            }
+        ],
+        "maxabsmag": [
+            {
+                "value": "-15.924",
+                "derived": true,
+                "source": "1,2,3"
+            }
+        ],
+        "maxappmag": [
+            {
+                "value": "23.01",
+                "derived": true,
+                "source": "1,3"
+            }
+        ],
+        "maxband": [
+            {
+                "value": "r",
+                "derived": true,
+                "source": "1,3"
+            }
+        ],
+        "maxdate": [
+            {
+                "value": "2015/01/03",
+                "derived": true,
+                "source": "1,3"
+            }
+        ],
+        "maxvisualabsmag": [
+            {
+                "value": "-16.06",
+                "derived": true,
+                "source": "1,2,3"
+            }
+        ],
+        "maxvisualappmag": [
+            {
+                "value": "23.01",
+                "derived": true,
+                "source": "1,3"
+            }
+        ],
+        "maxvisualband": [
+            {
+                "value": "r",
+                "derived": true,
+                "source": "1,3"
+            }
+        ],
+        "maxvisualdate": [
+            {
+                "value": "2015/01/03",
+                "derived": true,
+                "source": "1,3"
+            }
+        ],
+        "ra": [
+            {
+                "value": "11:32:05.09",
+                "u_value": "hours",
+                "source": "1"
+            }
+        ],
+        "redshift": [
+            {
+                "value": "0.1341",
+                "e_value": "0.0001",
+                "kind": "host",
+                "source": "1"
+            }
+        ],
+        "velocity": [
+            {
+                "value": "37530",
+                "u_value": "km/s",
+                "source": "3"
+            }
+        ],
+        "photometry": [
+            {
+                "time": "57025.2",
+                "band": "r",
+                "e_fluxdensity": "0.4",
+                "e_lower_magnitude": "0.17",
+                "e_upper_magnitude": "0.17",
+                "fluxdensity": "2.3",
+                "instrument": "IMACS",
+                "magnitude": "23.01",
+                "telescope": "Magellan",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "source": "1",
+                "e_magnitude": "0.17"
+            },
+            {
+                "time": "57026.2",
+                "band": "J",
+                "fluxdensity": "4.3",
+                "instrument": "HAWK-I",
+                "magnitude": "22.5",
+                "telescope": "VLT",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "upperlimit": true,
+                "upperlimitsigma": "3.0",
+                "source": "1",
+                "e_magnitude": "2"
+            },
+            {
+                "time": "57026.2",
+                "band": "r",
+                "e_fluxdensity": "0.3",
+                "e_lower_magnitude": "0.26",
+                "e_upper_magnitude": "0.26",
+                "fluxdensity": "1.4",
+                "instrument": "IMACS",
+                "magnitude": "23.53",
+                "telescope": "Magellan",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "source": "1",
+                "e_magnitude": "0.26"
+            },
+            {
+                "time": "57034.3",
+                "band": "r",
+                "fluxdensity": "0.8",
+                "instrument": "GMOS",
+                "magnitude": "24.2",
+                "telescope": "Gemini",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "upperlimit": true,
+                "upperlimitsigma": "3.0",
+                "source": "1",
+                "e_magnitude": "2"
+            },
+            {
+                "time": "57064.3",
+                "band": "H",
+                "fluxdensity": "0.3",
+                "instrument": "2MASS",
+                "magnitude": "24.9",
+                "telescope": "2MASS",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "upperlimit": true,
+                "upperlimitsigma": "3.0",
+                "source": "converted from F160W-band observation",
+                "system": "AB",
+                "e_magnitude": "2"
+            },
+            {
+                "time": "57064.3",
+                "band": "g",
+                "fluxdensity": "0.2",
+                "instrument": "LSSTCam",
+                "magnitude": "25.2",
+                "telescope": "LSST",
+                "u_fluxdensity": "\u00b5Jy",
+                "u_time": "MJD",
+                "upperlimit": true,
+                "upperlimitsigma": "3.0",
+                "source": "converted from F606W-band observation",
+                "system": "AB",
+                "e_magnitude": "2"
+            }
+        ]
+    }
+}
