@@ -83,7 +83,7 @@ class kn_interp_angle(model_base):
         interp_loc = os.environ["INTERP_LOC"]
         if interp_loc[-1] != "/":
             interp_loc += "/"
-        morph_comp_models = {"TP2": "2021_Wollaeger_TorusPeanut/",
+        morph_comp_models = {"TP2": "2021_Wollaeger_TorusPeanutWind2/",
                              "TP1": "2021_Wollaeger_TorusPeanutWind1/",
                              "TS2": "2021_Wollaeger_TorusSphericalWind2/",
                              "TS1": "2021_Wollaeger_TorusSphericalWind1/",
