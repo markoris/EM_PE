@@ -227,7 +227,7 @@ class sampler:
             try:
                 t = self.data[band][:,0]
             except IndexError:
-                t = self.data[band][0]
+                t = np.array(self.data[band][0]).reshape(1)
             m, m_err = model.evaluate(t, band)
             temp_data[band][0] = m
             temp_data[band][1] = m_err
