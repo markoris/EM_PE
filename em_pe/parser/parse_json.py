@@ -46,7 +46,7 @@ def _read_data(t0, file, bands, out, maxpts, tmax, telescopes, args):
                 and (telescopes is None or entry['telescope'] in telescopes)
                 and 'realization' not in entry):
                 ### [time, time error, magnitude, magnitude error]
-                to_append = np.array([[entry['time']], [0], [entry['magnitude']], [entry['e_magnitude']]]).astype(np.float)
+                to_append = np.array([[entry['time']], [0], [entry['magnitude']], [entry['e_magnitude']]]).astype(float)
                 to_append[0] -= t0
                 tmax_here = tmax
                 if "tmax_" + band in args.keys() and args["tmax_" + band] is not None:
