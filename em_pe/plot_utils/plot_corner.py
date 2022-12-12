@@ -221,7 +221,7 @@ def generate_corner_plot(sample_files, out, params, truths=None, cutoff=0, frac=
             plot_density = False
         ### make the corner plot
         fig_base = corner.corner(x, weights=weights, levels=args.cl, fig=fig_base, show_titles=True, labels=labels, truths=truths, quantiles=[0.05, 0.95],
-                                 color=color, plot_datapoints=False, plot_density=plot_density, titles=[r"$M_D$", r"$v_D$", r"$M_W$", r"$v_W$", r"$\theta$"],
+                                 color=color, plot_datapoints=False, plot_density=plot_density, titles=[r"$M_D$", r"$M_W$", r"$v_D$", r"$v_W$", r"$\theta$"],
                                  contours=True, smooth1d=0.1, smooth=0.1, label_kwargs={"fontsize":font_size},)
         i += 1
         params = params_copy
