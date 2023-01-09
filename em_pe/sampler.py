@@ -241,8 +241,12 @@ class sampler:
 
         if vectorized:
             for band in self.bands_used:
-                x = self.data[band][:,2]
-                err = self.data[band][:,3]
+                try:
+                    x = self.data[band][:,2]
+                    err = self.data[band][:,3]
+                except IndexError:
+                    x = self.data[band][2]
+                    err = self.data[band][3]
                 m = temp_data[band][0]
                 m_err = temp_data[band][1]
                 if self.ignore_m_err:
