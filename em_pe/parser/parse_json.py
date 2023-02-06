@@ -31,6 +31,9 @@ def _read_data(t0, file, bands, out, maxpts, tmax, telescopes, args):
         telescopes = set(telescopes)
     name = file.split('/')[-1] # get rid of path except for filename
     name = name.split('.')[0] # get event name from filename
+    # GRB data uses different format of reporting telescopes/instruments, adjust accordingly
+    if 'GW' in name: telescope_flag = 'telescope'
+    if 'GRB' in name: telescope_flag = 'instrument'
     ### read in the data
     with open(file, "r") as read_file:
         data = json.load(read_file, encoding="UTF-8")[name]['photometry']
@@ -42,10 +45,7 @@ def _read_data(t0, file, bands, out, maxpts, tmax, telescopes, args):
         if 'band' in entry:
             band = entry['band']
             ### check that it's a band we want and that it has an error magnitude
-            #if (band in bands and 'e_magnitude' in entry and 'telescope' in entry and 'source' in entry
-            #    and (telescopes is None or entry['telescope'] in telescopes)
-            #    and 'realization' not in entry and 'upperlimit' not in entry):
-            if (band in bands and 'e_magnitude' in entry and 'instrument' in entry and 'source' in entry
+            if (band in bands and 'e_magnitude' in entry and telescope_flag in entry and 'source' in entry
                 and (telescopes is None or entry['telescope'] in telescopes)
                 and 'realization' not in entry and 'upperlimit' not in entry):
                 ### [time, time error, magnitude, magnitude error]
