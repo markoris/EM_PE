@@ -42,9 +42,12 @@ def _read_data(t0, file, bands, out, maxpts, tmax, telescopes, args):
         if 'band' in entry:
             band = entry['band']
             ### check that it's a band we want and that it has an error magnitude
-            if (band in bands and 'e_magnitude' in entry and 'telescope' in entry and 'source' in entry
+            #if (band in bands and 'e_magnitude' in entry and 'telescope' in entry and 'source' in entry
+            #    and (telescopes is None or entry['telescope'] in telescopes)
+            #    and 'realization' not in entry and 'upperlimit' not in entry):
+            if (band in bands and 'e_magnitude' in entry and 'instrument' in entry and 'source' in entry
                 and (telescopes is None or entry['telescope'] in telescopes)
-                and 'realization' not in entry):
+                and 'realization' not in entry and 'upperlimit' not in entry):
                 ### [time, time error, magnitude, magnitude error]
                 to_append = np.array([[entry['time']], [0], [entry['magnitude']], [entry['e_magnitude']]]).astype(float)
                 to_append[0] -= t0
