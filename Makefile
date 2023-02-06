@@ -159,11 +159,11 @@ GRB060614_kn_interp_angle: directories
 
 GRB080503_kn_interp_angle: directories
 	mkdir -p pe_runs/$(dir_name)$(suffix)/
-	python3 ${EM_PE_INSTALL_DIR}/em_pe/parser/parse_json.py --f ${EM_PE_INSTALL_DIR}/Data/GRB080503.json --t0 54589.518206 --b g --b r --b i --b z --b y --out pe_runs/$(dir_name)$(suffix)/ --time-format mjd
+	python3 ${EM_PE_INSTALL_DIR}/em_pe/parser/parse_json.py --f ${EM_PE_INSTALL_DIR}/Data/GRB080503.json --t0 54589.518206 --b g --b r --b i --out pe_runs/$(dir_name)$(suffix)/ --time-format mjd
 	echo "#!/bin/sh" > pe_runs/$(dir_name)$(suffix)/sample.sh
-	echo "time python3 -u ${EM_PE_INSTALL_DIR}/em_pe/sampler.py --dat ./ --m kn_interp_angle -v --f g.txt --f r.txt --f i.txt --f z.txt --f y.txt --min 15 --max 15 --out samples.txt --burn-in 5 --beta-start 0.005 --beta-end 0.1 --keep-npts 1000000 --gaussian-prior-theta 0.0 20.0" >> pe_runs/$(dir_name)$(suffix)/sample.sh
+	echo "time python3 -u ${EM_PE_INSTALL_DIR}/em_pe/sampler.py --dat ./ --m kn_interp_angle -v --f g.txt --f r.txt --f i.txt --min 15 --max 15 --out samples.txt --burn-in 5 --beta-start 0.005 --beta-end 0.1 --keep-npts 1000000 --gaussian-prior-theta 0.0 20.0" >> pe_runs/$(dir_name)$(suffix)/sample.sh
 	echo "python3 ${EM_PE_INSTALL_DIR}/em_pe/plot_utils/plot_corner.py --posterior-samples samples-combined.txt --out corner.pdf --p mej_dyn --p mej_wind --p vej_dyn --p vej_wind --p theta --log-mass" > pe_runs/$(dir_name)$(suffix)/plot_corner.sh
-	echo "python3 ${EM_PE_INSTALL_DIR}/em_pe/plot_utils/plot_lc.py --log-time --posterior-samples samples-combined.txt --out lc.pdf --m kn_interp_angle --tmin 0.25 --tmax 20 --lc-file g.txt --b g --lc-file r.txt --b r --lc-file i.txt --b i --lc-file z.txt --b z --lc-file y.txt --b y" > pe_runs/$(dir_name)$(suffix)/plot_lc.sh
+	echo "python3 ${EM_PE_INSTALL_DIR}/em_pe/plot_utils/plot_lc.py --log-time --posterior-samples samples-combined.txt --out lc.pdf --m kn_interp_angle --tmin 0.25 --tmax 20 --lc-file g.txt --b g --lc-file r.txt --b r --lc-file i.txt --b i" > pe_runs/$(dir_name)$(suffix)/plot_lc.sh
 	echo "python3 ${EM_PE_INSTALL_DIR}/scripts/combine_posterior_samples.py --input-file samples_intermediate*.txt --keep-npts 1000000" > pe_runs/$(dir_name)$(suffix)/combine.sh
 	chmod u+x pe_runs/$(dir_name)$(suffix)/sample.sh
 	chmod u+x pe_runs/$(dir_name)$(suffix)/plot_corner.sh
@@ -185,11 +185,11 @@ GRB130603B_kn_interp_angle: directories
 
 GRB150101B_kn_interp_angle: directories
 	mkdir -p pe_runs/$(dir_name)$(suffix)/
-	python3 ${EM_PE_INSTALL_DIR}/em_pe/parser/parse_json.py --f ${EM_PE_INSTALL_DIR}/Data/GRB150101B.json --t0 57023.6 --b r --b J --out pe_runs/$(dir_name)$(suffix)/ --time-format mjd
+	python3 ${EM_PE_INSTALL_DIR}/em_pe/parser/parse_json.py --f ${EM_PE_INSTALL_DIR}/Data/GRB150101B.json --t0 57023.6 --b r --out pe_runs/$(dir_name)$(suffix)/ --time-format mjd
 	echo "#!/bin/sh" > pe_runs/$(dir_name)$(suffix)/sample.sh
-	echo "time python3 -u ${EM_PE_INSTALL_DIR}/em_pe/sampler.py --dat ./ --m kn_interp_angle -v --f r.txt --f J.txt --min 15 --max 15 --out samples.txt --fixed-param distance 574.6 --burn-in 5 --beta-start 0.005 --beta-end 0.1 --keep-npts 1000000 --gaussian-prior-theta 13.0 10.0" >> pe_runs/$(dir_name)$(suffix)/sample.sh
+	echo "time python3 -u ${EM_PE_INSTALL_DIR}/em_pe/sampler.py --dat ./ --m kn_interp_angle -v --f r.txt --min 15 --max 15 --out samples.txt --fixed-param distance 574.6 --burn-in 5 --beta-start 0.005 --beta-end 0.1 --keep-npts 1000000 --gaussian-prior-theta 13.0 10.0" >> pe_runs/$(dir_name)$(suffix)/sample.sh
 	echo "python3 ${EM_PE_INSTALL_DIR}/em_pe/plot_utils/plot_corner.py --posterior-samples samples-combined.txt --out corner.pdf --p mej_dyn --p mej_wind --p vej_dyn --p vej_wind --p theta --log-mass" > pe_runs/$(dir_name)$(suffix)/plot_corner.sh
-	echo "python3 ${EM_PE_INSTALL_DIR}/em_pe/plot_utils/plot_lc.py --log-time --posterior-samples samples-combined.txt --out lc.pdf --m kn_interp_angle --tmin 0.25 --tmax 20 --lc-file r.txt --b r --lc-file J.txt --b J --fixed-param dist 574.6" > pe_runs/$(dir_name)$(suffix)/plot_lc.sh
+	echo "python3 ${EM_PE_INSTALL_DIR}/em_pe/plot_utils/plot_lc.py --log-time --posterior-samples samples-combined.txt --out lc.pdf --m kn_interp_angle --tmin 0.25 --tmax 20 --lc-file r.txt --b r --fixed-param dist 574.6" > pe_runs/$(dir_name)$(suffix)/plot_lc.sh
 	echo "python3 ${EM_PE_INSTALL_DIR}/scripts/combine_posterior_samples.py --input-file samples_intermediate*.txt --keep-npts 1000000" > pe_runs/$(dir_name)$(suffix)/combine.sh
 	chmod u+x pe_runs/$(dir_name)$(suffix)/sample.sh
 	chmod u+x pe_runs/$(dir_name)$(suffix)/plot_corner.sh
