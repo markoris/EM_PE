@@ -1,6 +1,6 @@
 # EM PE
 
-Joint GW/EM parameter estimation.
+EM parameter estimation tool.
 
 
 - [Getting started](https://github.com/bwc3252/EM_PE/blob/master/doc/GETTING_STARTED.md)
